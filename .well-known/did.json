@@ -16,8 +16,12 @@
       }
     }
   ],
-  "assertionMethod": ["did:web:encultura.org#owner"],
-  "authentication": ["did:web:encultura.org#owner"]
+  "assertionMethod": [
+    "did:web:encultura.org#owner"
+  ],
+  "authentication": [
+    "did:web:encultura.org#owner"
+  ],
   "service": [
     {
       "id": "did:web:encultura.org#blog",
