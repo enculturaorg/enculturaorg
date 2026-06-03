@@ -18,4 +18,16 @@
   ],
   "assertionMethod": ["did:web:encultura.org#owner"],
   "authentication": ["did:web:encultura.org#owner"]
+  "service": [
+    {
+      "id": "did:web:encultura.org#blog",
+      "type": "WebPublishing",
+      "serviceEndpoint": "https://blog.encultura.org"
+    },
+    {
+      "id": "did:web:encultura.org#knowledgebase",
+      "type": "DigitalGarden",
+      "serviceEndpoint": "https://notes.encultura.org"
+    }
+  ]
 }
