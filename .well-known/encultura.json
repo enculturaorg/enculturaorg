@@ -1,0 +1,17 @@
+{
+"name": "Encultura",
+"status": "Genesis Phase",
+"website": "https://encultura.org",
+"identity_anchor": "did:web:encultura.org",
+"description": "Protocol for cultivating human navigational capacity through verifiable governance and developmental stewardship.",
+"governance_document": "https://encultura.org/GOVERNANCE.md",
+"repository": "https://github.com/enculturaorg/enculturaorg",
+"verification": {
+"method": "did:web",
+"authority": "did:web:encultura.org"
+},
+"roles": {
+"genesis_steward": "Encultura.org",
+"future_governance_body": "Anjuman"
+}
+}
