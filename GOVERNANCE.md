@@ -1,54 +1,53 @@
-# Encultura Governance
+# Encultura Identity and Verification
 
-## What is Encultura?
+## Protocol Authority
 
-Encultura is a protocol for cultivating navigational capacity and healthy network participation.
+Encultura.org serves as the public steward of the Encultura Protocol during the Genesis Phase.
 
-Its objective is the stewardship of developmental conditions rather than the optimization of measurable outputs alone.
+## Machine-Verifiable Identity
 
-## Who Speaks for Encultura?
+The protocol's machine-verifiable identity anchor is:
 
-During the Genesis Phase, Encultura.org serves as:
+did:web:encultura.org
+
+The DID provides:
+
+* Authentication of official protocol communications.
+* Assertion of protocol claims.
+* Verification of protocol attestations.
+* Continuity of protocol identity across governance transitions.
+
+## Verification Infrastructure
+
+The DID document currently publishes:
+
+Authentication:
+did:web:encultura.org#owner
+
+Assertion Method:
+did:web:encultura.org#owner
+
+Public Services:
+
+* Blog
+  https://blog.encultura.org
+
+* Knowledge Base
+  https://notes.encultura.org
+
+Official protocol claims should be traceable to either:
+
+1. Encultura.org publications.
+2. Resources linked through the DID document.
+3. Future cryptographically signed attestations.
+
+## Genesis Stewardship
+
+During the Genesis Phase, did:web:encultura.org is recognized as:
 
 * Founding Steward
-* Governance Authority
-* Publisher of Official Protocol Artifacts
-* Issuer of Official Attestations
+* Founding Member
+* Funding Member
+* Initial Governance Authority
 
-As governance matures, authority transitions to the Anjuman according to protocol procedures.
-
-## How Are Claims Verified?
-
-Claims are verified through:
-
-* Public protocol records
-* Signed attestations
-* Governance ratification
-* Published amendment history
-* DID-based identity verification
-
-Verification takes precedence over personal authority.
-
-## What Authority Does did:web:encultura.org Hold?
-
-did:web:encultura.org is the machine-verifiable identity anchor of Encultura.
-
-It authenticates:
-
-* Official protocol publications
-* Governance decisions
-* Amendments
-* Membership attestations
-* Historical continuity of the protocol
-
-## Governance Transition
-
-The protocol is intended to evolve from founder stewardship toward distributed governance through:
-
-1. Formation of the Anjuman.
-2. Admission of additional members.
-3. Ratified protocol amendments.
-4. Development of distributed stewardship capacity.
-5. Establishment of autonomous protocol nodes.
-
-The long-term goal is distributed stewardship rather than permanent centralized authority.
+These roles remain in effect until modified through a ratified governance transition process.
