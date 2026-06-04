@@ -32,6 +32,21 @@
       "id": "did:web:encultura.org#knowledgebase",
       "type": "DigitalGarden",
       "serviceEndpoint": "https://notes.encultura.org"
+    },
+    {
+    "id": "did:web:encultura.org#governance",
+    "type": "Governance",
+    "serviceEndpoint": "https://encultura.org/governance"
+    },
+    {
+      "id": "did:web:encultura.org#protocol",
+      "type": "Protocol",
+      "serviceEndpoint": "https://encultura.org/protocol"
+    },
+    {
+      "id": "did:web:encultura.org#ai-manifest",
+      "type": "AIManifest",
+      "serviceEndpoint": "https://encultura.org/.well-known/encultura.json"
     }
   ]
 }
