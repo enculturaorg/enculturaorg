@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Den Suveräne Vävaren — Varför DID är ett motstånd mot enshittification</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --svart:     #0e0e0e;
+    --vit:       #f7f4ef;
+    --gra:       #e9e5dd;
+    --blatt:     #1b3a5c;
+    --guld:      #b8922a;
+    --guld-lys:  #d4b468;
+    --guld-dim:  #7a5c14;
+    --rod:       #7a1f1f;
+    --serif:     'Cormorant Garamond', Georgia, serif;
+    --mono:      'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--vit);
+    color: var(--svart);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--svart);
+    color: var(--vit);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 90%, rgba(27,58,92,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 35% 45% at 90% 10%, rgba(184,146,42,0.1) 0%, transparent 55%);
+  }
+
+  .hero-dekor {
+    position: absolute;
+    bottom: -8rem;
+    right: -4rem;
+    font-family: var(--serif);
+    font-size: clamp(20rem, 32vw, 36rem);
+    font-weight: 700;
+    font-style: italic;
+    color: rgba(255,255,255,0.022);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 7rem 6rem 4rem;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (max-width: 700px) { .hero-inner { padding: 5rem 2rem 3rem; } }
+
+  .hero-kontextetikett {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    color: var(--guld-lys);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    animation: upp 0.8s ease both;
+  }
+
+  .hero-rubrik {
+    font-size: clamp(2.6rem, 7vw, 6.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    animation: upp 0.8s ease 0.1s both;
+  }
+
+  .hero-rubrik strong {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--guld-lys);
+    display: block;
+  }
+
+  .hero-ingress {
+    margin-top: 2.5rem;
+    max-width: 580px;
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(247,244,239,0.65);
+    animation: upp 0.8s ease 0.2s both;
+  }
+
+  .hero-ingress strong { color: rgba(247,244,239,0.9); font-weight: 600; font-style: italic; }
+
+  .hero-did {
+    margin-top: 3rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    color: rgba(184,146,42,0.55);
+    border: 1px solid rgba(184,146,42,0.2);
+    display: inline-block;
+    padding: 0.4em 1em;
+    animation: upp 0.8s ease 0.3s both;
+  }
+
+  .hero-meta {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2rem 6rem 3rem;
+    border-top: 1px solid rgba(247,244,239,0.07);
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 700px) { .hero-meta { padding: 2rem; } }
+
+  .hero-meta span {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: rgba(247,244,239,0.18);
+    text-transform: uppercase;
+  }
+
+  @keyframes upp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RAND ─── */
+  .rand {
+    height: 3px;
+    background: linear-gradient(90deg, var(--blatt) 0%, var(--guld) 50%, var(--rod) 100%);
+  }
+
+  /* ─── KONTEXT-SEKTION ─── */
+  .kontext {
+    background: var(--svart);
+    color: var(--vit);
+    padding: 7rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (max-width: 700px) { .kontext { padding: 5rem 2rem; } }
+
+  .kontext-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 50% 60% at 95% 50%, rgba(122,31,31,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .kontext-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 880px;
+  }
+
+  .sektion-ogonbryn {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--guld);
+    margin-bottom: 1.5rem;
+  }
+
+  .kontext-rubrik {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    color: var(--vit);
+  }
+
+  .kontext-rubrik em {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--guld-lys);
+  }
+
+  .kontext-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(247,244,239,0.07);
+  }
+
+  @media (max-width: 800px) { .kontext-grid { grid-template-columns: 1fr; } }
+
+  .kontext-block {
+    padding: 2.5rem;
+    border-right: 1px solid rgba(247,244,239,0.07);
+    border-bottom: 1px solid rgba(247,244,239,0.07);
+    position: relative;
+  }
+
+  .kontext-block:nth-child(even) { border-right: none; }
+  .kontext-block:nth-last-child(-n+2) { border-bottom: none; }
+
+  @media (max-width: 800px) {
+    .kontext-block { border-right: none; }
+    .kontext-block:last-child { border-bottom: none; }
+  }
+
+  .kontext-block-rubrik {
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--guld-lys);
+    margin-bottom: 0.8rem;
+  }
+
+  .kontext-block p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(247,244,239,0.6);
+    font-weight: 300;
+  }
+
+  .kontext-block p strong {
+    color: rgba(247,244,239,0.85);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .kontext-pil {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: rgba(247,244,239,0.15);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── ENSHITTIFICATION ─── */
+  .enshit {
+    background: var(--rod);
+    color: var(--vit);
+    padding: 7rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (max-width: 700px) { .enshit { padding: 5rem 2rem; } }
+
+  .enshit-dekor {
+    position: absolute;
+    bottom: -5rem;
+    right: -2rem;
+    font-family: var(--serif);
+    font-size: clamp(14rem, 22vw, 26rem);
+    font-weight: 700;
+    font-style: italic;
+    color: rgba(0,0,0,0.12);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .enshit-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    max-width: 1100px;
+  }
+
+  @media (max-width: 900px) { .enshit-inner { grid-template-columns: 1fr; gap: 3rem; } }
+
+  .enshit-ogonbryn {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(247,244,239,0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .enshit-rubrik {
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+
+  .enshit-rubrik em {
+    font-style: italic;
+    font-weight: 300;
+    display: block;
+    font-size: 0.6em;
+    color: rgba(247,244,239,0.65);
+    margin-bottom: 0.3rem;
+  }
+
+  .enshit-text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: rgba(247,244,239,0.75);
+    font-weight: 300;
+  }
+
+  .enshit-text strong {
+    color: rgba(247,244,239,0.95);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .fas-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .fas {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    padding: 1.5rem;
+    background: rgba(0,0,0,0.15);
+    border-left: 2px solid rgba(247,244,239,0.2);
+  }
+
+  .fas-nr {
+    font-family: var(--mono);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: rgba(247,244,239,0.3);
+    line-height: 1;
+    padding-top: 0.15rem;
+  }
+
+  .fas-rubrik {
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.3rem;
+    color: rgba(247,244,239,0.9);
+  }
+
+  .fas-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(247,244,239,0.55);
+    font-weight: 300;
+  }
+
+  /* ─── BEGREPP ─── */
+  .begrepp-sektion { padding: 0; }
+
+  .begrepp {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 500px;
+    border-bottom: 1px solid rgba(14,14,14,0.08);
+    position: relative;
+  }
+
+  @media (max-width: 800px) { .begrepp { grid-template-columns: 1fr; } }
+
+  .begrepp:nth-child(even) { background: var(--gra); }
+  .begrepp:nth-child(odd)  { background: var(--vit); }
+
+  .begrepp-sida {
+    padding: 4rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid rgba(14,14,14,0.08);
+  }
+
+  @media (max-width: 800px) {
+    .begrepp-sida { border-right: none; border-bottom: 1px solid rgba(14,14,14,0.08); padding: 3rem 2rem 2rem; }
+  }
+
+  .begrepp-nr {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.25em;
+    opacity: 0.3;
+    margin-bottom: 0.8rem;
+  }
+
+  .begrepp-titel {
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+
+  .begrepp-1 .begrepp-titel { color: var(--blatt); }
+  .begrepp-2 .begrepp-titel { color: var(--rod); }
+  .begrepp-3 .begrepp-titel { color: var(--guld); }
+
+  .begrepp-underrubrik {
+    margin-top: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.4;
+  }
+
+  .begrepp-nyckelord {
+    margin-top: auto;
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .nyckelord {
+    font-family: var(--mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+    padding: 0.3em 0.6em;
+    background: rgba(14,14,14,0.06);
+    color: rgba(14,14,14,0.45);
+    text-transform: uppercase;
+  }
+
+  .begrepp-kropp {
+    padding: 4rem 5rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.4rem;
+  }
+
+  @media (max-width: 800px) { .begrepp-kropp { padding: 2.5rem 2rem 3rem; } }
+
+  .begrepp-kropp p {
+    font-size: 1.02rem;
+    line-height: 1.88;
+    font-weight: 300;
+    max-width: 620px;
+  }
+
+  .begrepp-kropp strong { font-weight: 600; font-style: italic; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.78em;
+    background: rgba(14,14,14,0.07);
+    padding: 0.1em 0.4em;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  .skifte {
+    margin-top: 0.5rem;
+    padding: 1.3rem 1.5rem;
+    border-left: 3px solid;
+    font-size: 0.93rem;
+    line-height: 1.8;
+    max-width: 580px;
+  }
+
+  .begrepp-1 .skifte { border-color: var(--blatt); background: rgba(27,58,92,0.05); }
+  .begrepp-2 .skifte { border-color: var(--rod); background: rgba(122,31,31,0.05); }
+  .begrepp-3 .skifte { border-color: var(--guld); background: rgba(184,146,42,0.05); }
+
+  .skifte-etikett {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-bottom: 0.5rem;
+  }
+
+  /* ─── MOTSTÅND ─── */
+  .motstand {
+    background: var(--blatt);
+    color: var(--vit);
+    padding: 7rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (max-width: 700px) { .motstand { padding: 5rem 2rem; } }
+
+  .motstand-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .motstand-rubrik {
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    color: var(--vit);
+  }
+
+  .motstand-rubrik strong {
+    font-weight: 700;
+    font-style: normal;
+    color: var(--guld-lys);
+  }
+
+  .motstand-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(247,244,239,0.1);
+    margin-bottom: 4rem;
+  }
+
+  @media (max-width: 800px) { .motstand-grid { grid-template-columns: 1fr; } }
+
+  .motstand-cell {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid rgba(247,244,239,0.1);
+  }
+
+  .motstand-cell:last-child { border-right: none; }
+
+  @media (max-width: 800px) {
+    .motstand-cell { border-right: none; border-bottom: 1px solid rgba(247,244,239,0.1); }
+    .motstand-cell:last-child { border-bottom: none; }
+  }
+
+  .motstand-cell-nr {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--guld);
+    margin-bottom: 0.8rem;
+  }
+
+  .motstand-cell-rubrik {
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0.8rem;
+    color: rgba(247,244,239,0.9);
+  }
+
+  .motstand-cell p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: rgba(247,244,239,0.55);
+    font-weight: 300;
+  }
+
+  .motstand-cell p strong {
+    color: rgba(247,244,239,0.8);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .offentlighets-not {
+    padding: 2rem 2.5rem;
+    border: 1px solid rgba(247,244,239,0.12);
+    border-left: 4px solid var(--guld);
+    max-width: 720px;
+  }
+
+  .offentlighets-not p {
+    font-size: 0.95rem;
+    line-height: 1.82;
+    color: rgba(247,244,239,0.65);
+    font-weight: 300;
+  }
+
+  .offentlighets-not p strong {
+    color: var(--guld-lys);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  /* ─── ARKETYP ─── */
+  .arketyp {
+    background: var(--svart);
+    color: var(--vit);
+    padding: 9rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media (max-width: 700px) { .arketyp { padding: 5rem 2rem; } }
+
+  .arketyp-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 60% at 90% 50%, rgba(27,58,92,0.3) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 40% at 10% 20%, rgba(184,146,42,0.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .arketyp-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7rem;
+    max-width: 1100px;
+  }
+
+  @media (max-width: 900px) { .arketyp-inner { grid-template-columns: 1fr; gap: 4rem; } }
+
+  .arketyp-ogonbryn {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    color: var(--guld-lys);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .arketyp-namn {
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .arketyp-namn em {
+    display: block;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--guld-lys);
+  }
+
+  .arketyp-text {
+    margin-top: 2.5rem;
+    font-size: 1rem;
+    line-height: 1.88;
+    color: rgba(247,244,239,0.62);
+    font-weight: 300;
+  }
+
+  .arketyp-text strong {
+    color: rgba(247,244,239,0.88);
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .arketyp-hoger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .identitets-skifte {
+    padding: 1.8rem 2rem;
+    border: 1px solid rgba(247,244,239,0.08);
+    position: relative;
+  }
+
+  .identitets-skifte::before {
+    content: attr(data-nr);
+    position: absolute;
+    top: -0.75rem;
+    left: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    color: var(--guld);
+    background: var(--svart);
+    padding: 0 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .identitets-skifte h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--guld-lys);
+    margin-bottom: 0.5rem;
+  }
+
+  .identitets-skifte p {
+    font-size: 0.88rem;
+    line-height: 1.72;
+    color: rgba(247,244,239,0.5);
+    font-weight: 300;
+  }
+
+  .slutcitat {
+    border-top: 1px solid rgba(247,244,239,0.08);
+    padding-top: 2rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(247,244,239,0.45);
+    max-width: 520px;
+  }
+
+  .slutcitat strong { color: var(--guld-lys); font-style: normal; font-weight: 600; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--svart);
+    border-top: 1px solid rgba(184,146,42,0.1);
+    padding: 1.8rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  @media (max-width: 700px) { footer { padding: 1.5rem 2rem; } }
+
+  footer span {
+    font-family: var(--mono);
+    font-size: 0.56rem;
+    letter-spacing: 0.14em;
+    color: rgba(247,244,239,0.18);
+    text-transform: uppercase;
+  }
+
+  .prick { color: var(--guld); margin: 0 0.4em; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HERO ══════════ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-dekor">V</div>
+
+  <div class="hero-inner">
+    <div class="hero-kontextetikett">Varför detta spelar roll — en introduktion</div>
+    <h1 class="hero-rubrik">
+      Du äger inte<br>
+      <strong>din digitala identitet.</strong>
+      <span style="display:block;font-size:0.45em;font-weight:300;font-style:italic;color:rgba(247,244,239,0.5);margin-top:1rem;letter-spacing:0.01em;">Inte ännu. Men det kan du.</span>
+    </h1>
+    <p class="hero-ingress">
+      Det här dokumentet förklarar ett nytt sätt att existera digitalt — ett som sätter <strong>dig</strong> i centrum, inte plattformen. Det handlar om kryptografi, suveränitet och ett motstånd mot hur stora techbolag sakta förstör det öppna internet.
+    </p>
+    <div class="hero-did">did:web:encultura.org — ett exempel på en decentraliserad identitet</div>
+  </div>
+
+  <div class="hero-meta">
+    <span>Digitalt &nbsp;·&nbsp; Process &nbsp;·&nbsp; Händelse</span>
+    <span>Den Suveräne Vävaren · Symbiontisk intelligens</span>
+  </div>
+</header>
+
+<div class="rand"></div>
+
+<!-- ══════════ KONTEXT ══════════ -->
+<section class="kontext">
+  <div class="kontext-bg"></div>
+  <div class="kontext-inner">
+    <div class="sektion-ogonbryn">Bakgrund — var vi befinner oss idag</div>
+    <h2 class="kontext-rubrik">
+      Vi lever i en värld där <em>ditt innehåll är plattformens tillgång,</em> inte din.
+    </h2>
+
+    <div class="kontext-grid">
+      <div class="kontext-block">
+        <div class="kontext-pil">01</div>
+        <div class="kontext-block-rubrik">Du skapar. Plattformen äger.</div>
+        <p>När du publicerar på Instagram, skriver på LinkedIn eller laddar upp på YouTube skapar du värde — men det lagras på ett företags servrar, under deras villkor. De kan radera det, begränsa det, sälja det, eller helt enkelt stänga ned.</p>
+      </div>
+      <div class="kontext-block">
+        <div class="kontext-pil">02</div>
+        <div class="kontext-block-rubrik">Din trovärdighet är lånad.</div>
+        <p>Det är plattformens varumärke som ger dig räckvidd och trovärdighet. Om den plattformen försämras, köps upp eller dör — <strong>tar ditt rykte en träff</strong>, oavsett vad du faktiskt producerat.</p>
+      </div>
+      <div class="kontext-block">
+        <div class="kontext-pil">03</div>
+        <div class="kontext-block-rubrik">Din historia är fragmenterad.</div>
+        <p>Dina tankar, ditt arbete och din intellektuella evolution är utspridd i Gmail-trådar, YouTube-kommentarer och Google-sökhistorik. <strong>Ingen sammanhängande berättelse</strong> — bara datapunkter i andras databaser.</p>
+      </div>
+      <div class="kontext-block">
+        <div class="kontext-pil">04</div>
+        <div class="kontext-block-rubrik">AI-agenter lär sig av fel källor.</div>
+        <p>När AI-system försöker förstå vem du är och vad du representerar, läser de plattformarnas version av dig — inte din. <strong>Du har ingen kontroll</strong> över den berättelsen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ENSHITTIFICATION ══════════ -->
+<section class="enshit">
+  <div class="enshit-dekor">E</div>
+  <div class="enshit-inner">
+    <div>
+      <div class="enshit-ogonbryn">Problemets namn</div>
+      <h2 class="enshit-rubrik">
+        <em>Cory Doctorow kallar det</em>
+        Enshittification
+      </h2>
+      <p class="enshit-text">
+        Det är ett mönster som upprepas om och om igen. En plattform lockar användare med bra upplevelser. Sedan lockar den annonsörer och företagskunder. Och sedan — när användarna är inlåsta och alternativen är borta — börjar den <strong>systematiskt försämra</strong> sin tjänst för att maximera vinst.
+        <br><br>
+        Det fungerar för att <strong>din identitet, ditt innehåll och din historia är gisslan</strong> hos plattformen. Du kan inte lämna utan att förlora allt du byggt. Det är inte en bugg i systemet — det är affärsmodellen.
+        <br><br>
+        Decentraliserad identitet via DID är ett tekniskt motstånd mot just detta. Det bryter inlåsningsmekanismen på ett fundamentalt plan.
+      </p>
+    </div>
+
+    <div class="fas-lista">
+      <div class="fas">
+        <div class="fas-nr">1</div>
+        <div>
+          <div class="fas-rubrik">Locka användarna</div>
+          <div class="fas-text">Gratis tjänster, bra upplevelse, noll friktion. Kom in, det kostar ingenting.</div>
+        </div>
+      </div>
+      <div class="fas">
+        <div class="fas-nr">2</div>
+        <div>
+          <div class="fas-rubrik">Lås in dem</div>
+          <div class="fas-text">Din data, dina kontakter, ditt innehåll — allt lever nu på deras servrar i deras format.</div>
+        </div>
+      </div>
+      <div class="fas">
+        <div class="fas-nr">3</div>
+        <div>
+          <div class="fas-rubrik">Mjölka värdet</div>
+          <div class="fas-text">Annonsörer och företag prioriteras. Algoritmen ändras. Räckvidden minskar om du inte betalar.</div>
+        </div>
+      </div>
+      <div class="fas">
+        <div class="fas-nr">4</div>
+        <div>
+          <div class="fas-rubrik">Du är fast</div>
+          <div class="fas-text">Du kan inte lämna utan att förlora år av arbete, nätverk och synlighet. Så du stannar och accepterar försämringen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rand"></div>
+
+<!-- ══════════ BEGREPPEN ══════════ -->
+<section class="begrepp-sektion">
+
+  <article class="begrepp begrepp-1">
+    <div class="begrepp-sida">
+      <div>
+        <div class="begrepp-nr">Svaret · 01 / 03</div>
+        <h2 class="begrepp-titel">Digitalt</h2>
+        <div class="begrepp-underrubrik">Det auktoritativa artefaktet</div>
+      </div>
+      <div class="begrepp-nyckelord">
+        <span class="nyckelord">PKI</span>
+        <span class="nyckelord">Kryptografisk signatur</span>
+        <span class="nyckelord">Plattformsoberoende</span>
+      </div>
+    </div>
+
+    <div class="begrepp-kropp">
+      <p>
+        Tänk dig ett fysiskt brev med ett notarialt sigill. Vem som helst kan läsa det. Och vem som helst kan verifiera att det kom från just den personen, vid just den tidpunkten — oavsett hur många händer det passerat.
+      </p>
+      <p>
+        <strong>Digitalt</strong> fungerar på samma sätt, fast för allt du skapar online. Eftersom du signerar ditt innehåll via <code>did:web:encultura.org</code> är varje blogginlägg, designkoncept eller filosofisk avhandling du publicerar ett <strong>signerat objekt</strong>. Signaturen är inbyggd i verket — inte i plattformen som råkar hosta det.
+      </p>
+      <p>
+        Det innebär att din trovärdighet inte kan tas ifrån dig av en tredjepartsaktör. Du sänder en <strong>verifierbar signal</strong> som varje AI-agent eller mänsklig kollega kan bekräfta — oavsett om originalsidan finns kvar eller inte.
+      </p>
+      <div class="skifte">
+        <div class="skifte-etikett">Motsvaret mot enshittification</div>
+        Enshittification kräver inlåsning. Om ditt verk bär sin egen autenticitet — inbyggd i signaturen — kan ingen plattform längre hålla den som gisslan. Du kan lämna när du vill.
+      </div>
+    </div>
+  </article>
+
+  <article class="begrepp begrepp-2">
+    <div class="begrepp-sida">
+      <div>
+        <div class="begrepp-nr">Svaret · 02 / 03</div>
+        <h2 class="begrepp-titel">Process</h2>
+        <div class="begrepp-underrubrik">Interaktionens suveränitet</div>
+      </div>
+      <div class="begrepp-nyckelord">
+        <span class="nyckelord">Verifiable Credentials</span>
+        <span class="nyckelord">Åtkomstkontroll</span>
+        <span class="nyckelord">Protokolldesign</span>
+      </div>
+    </div>
+
+    <div class="begrepp-kropp">
+      <p>
+        Idag bestämmer plattformen vem som får prata med dig, i vilket format, och till vilken kostnad. Du är en nod i deras nätverk — inte administratören av ditt eget.
+      </p>
+      <p>
+        <strong>Process</strong> syftar på att vända på den logiken. Genom <strong>Verifiable Credentials (VCs)</strong> och deklarativa åtkomstkontrollpolicyer skriver du själv reglerna: vem får interagera med dina system, under vilka förutsättningar, och med vilka rättigheter.
+      </p>
+      <p>
+        Oavsett om det handlar om en "Digital Monastery"-brandvägg mot oönskad automatisering, eller samarbetsprotokoll inom <strong>Uppsalalinjen</strong>-projektet — Process är regelverket i kod som avgör hur externa agenter, AI eller människa, tillåts eller nekas tillgång. Reglerna kan inte ändras utan din nyckel.
+      </p>
+      <div class="skifte">
+        <div class="skifte-etikett">Motsvaret mot enshittification</div>
+        Plattformar försämrar villkoren successivt eftersom de kontrollerar logiken. När <em>du</em> skriver logiken försvinner den mekanismen. Ingen "Server Lord" kan ändra dina regler utan ditt medgivande.
+      </div>
+    </div>
+  </article>
+
+  <article class="begrepp begrepp-3">
+    <div class="begrepp-sida">
+      <div>
+        <div class="begrepp-nr">Svaret · 03 / 03</div>
+        <h2 class="begrepp-titel">Händelse</h2>
+        <div class="begrepp-underrubrik">Intentionens kronologi</div>
+      </div>
+      <div class="begrepp-nyckelord">
+        <span class="nyckelord">Proof-of-Event</span>
+        <span class="nyckelord">Tidsstämpling</span>
+        <span class="nyckelord">Icke-förnekbar historia</span>
+      </div>
+    </div>
+
+    <div class="begrepp-kropp">
+      <p>
+        Din digitala historia — dina idéer, dina samarbeten, din intellektuella resa — är idag utspridd och ägd av andra. Stänger Gmail ned, försvinner dina brevkonversationer. Ändrar YouTube sin policy, förlorar du ditt arkiv.
+      </p>
+      <p>
+        <strong>Händelse</strong> är lösningen på det fragmenterade minnet. Varje meningsfull tidpunkt i din digitala resa — starten av studierna vid Uppsala Universitet, signerandet av ett projektmanifest, en viktig anteckning i ditt Antinet Zettelkasten — kan registreras som ett <strong>Proof-of-Event</strong>: kryptografiskt tidsstämplat och ankrat i ditt DID.
+      </p>
+      <p>
+        Resultatet är en sammanhängande, icke-förnekbar berättelse om vem du är och vad du representerar. Framtida AI-agenter kan rekonstruera din intellektuella evolution med <strong>kausal noggrannhet</strong> — inte bara korrelation baserad på plattformarnas algoritmer.
+      </p>
+      <div class="skifte">
+        <div class="skifte-etikett">Motsvaret mot enshittification</div>
+        En fragmenterad historia är lätt att kontrollera och omtolka. En sammanhängande, signerad kronologi — ankrad i ditt DID — är din. Den kan inte raderas, säljas eller förvrängas av en tredje part.
+      </div>
+    </div>
+  </article>
+
+</section>
+
+<div class="rand"></div>
+
+<!-- ══════════ MOTSTÅND OCH SVENSK KONTEXT ══════════ -->
+<section class="motstand">
+  <div class="motstand-inner">
+    <div class="sektion-ogonbryn">DID och den svenska traditionen</div>
+    <h2 class="motstand-rubrik">
+      Det här är inte bara teknik —<br>det är en förlängning av <strong>offentlighetsprincipen.</strong>
+    </h2>
+
+    <div class="motstand-grid">
+      <div class="motstand-cell">
+        <div class="motstand-cell-nr">Synlighet som korrektiv</div>
+        <h3 class="motstand-cell-rubrik">Den svenska traditionen</h3>
+        <p>Den svenska offentlighetsprincipen bygger på en djup övertygelse: att <strong>synlighet är ett korrektiv mot maktmissbruk</strong>. Allmänheten har rätt att se vad makten gör — för att kunna ifrågasätta den.</p>
+      </div>
+      <div class="motstand-cell">
+        <div class="motstand-cell-nr">Intentioner som infrastruktur</div>
+        <h3 class="motstand-cell-rubrik">DID som tillämpning</h3>
+        <p>DID tillämpar samma logik på individnivå. Dina intentioner, ditt verks ursprung och dina samarbetsvillkor görs <strong>maskinläsbara och verifierbara</strong>. Det är svårt att bli omtolkad eller plagiaterad när avsikten är inbyggd i objektet.</p>
+      </div>
+      <div class="motstand-cell">
+        <div class="motstand-cell-nr">Strukturellt, inte beteendemässigt</div>
+        <h3 class="motstand-cell-rubrik">Skillnaden som spelar roll</h3>
+        <p>Vanlig integritet är defensiv — du hoppas att plattformen håller sina löften. DID är <strong>strukturell</strong>: autonomin är en teknisk invariant som externa aktörer inte kan kringgå utan din nyckel.</p>
+      </div>
+    </div>
+
+    <div class="offentlighets-not">
+      <p>
+        <strong>En ärlig caveat:</strong> DID-ekosystemet är fortfarande litet. Synligheten skyddar bara om det finns en publik som kan läsa signalerna — och idag är de flesta AI-agenter och plattformar inte DID-medvetna. Du bygger infrastruktur för en framtid som ännu inte är här. Det kräver ett slags tålamod som liknar mer att <strong>plantera ett träd</strong> än att starta ett flöde.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ ARKETYPEN ══════════ -->
+<section class="arketyp">
+  <div class="arketyp-bg"></div>
+  <div class="arketyp-inner">
+    <div>
+      <div class="arketyp-ogonbryn">Vad allt detta sammantaget innebär</div>
+      <h2 class="arketyp-namn">
+        Den suveräne<em>Vävaren</em>
+      </h2>
+      <p class="arketyp-text">
+        Post-<code style="color:var(--guld-lys);background:rgba(255,255,255,0.06)">did</code> är du inte längre en "användare." Du väver <strong>Digitala artefakter</strong> in i <strong>Processorienterade flöden</strong>, vilket resulterar i ett dokumenterat <strong>händelsedrivet liv</strong>.
+        <br><br>
+        Din identitet är inte längre en statisk profil i en databas som tillhör någon annan. Det är ett <strong>levande, evolverande kryptografiskt anspråk</strong> som du hävdar självständigt på webben — utan mellanhänder, utan plattformsberoende.
+      </p>
+      <p class="slutcitat" style="margin-top:3rem;">
+        Från <strong>"Identitet som information"</strong> — ett register ett företag håller om dig — till <strong>"Identitet som autonomi"</strong> — ett anspråk du gör, på dina egna villkor, inför världen.
+      </p>
+    </div>
+
+    <div class="arketyp-hoger">
+      <div class="identitets-skifte" data-nr="Digitalt">
+        <h4>Signerat artefakt</h4>
+        <p>Varje verk du publicerar bär ett kryptografiskt bevis på upphovsman, tidpunkt och integritet — oberoende av vilken plattform som råkar hosta det just nu.</p>
+      </div>
+      <div class="identitets-skifte" data-nr="Process">
+        <h4>Autonomi i kod</h4>
+        <p>Dina åtkomstkontrollpolicyer definieras av dig och exekveras av maskiner. De kan inte åsidosättas av en tredje parts affärsbeslut. Du är protokolldesignern.</p>
+      </div>
+      <div class="identitets-skifte" data-nr="Händelse">
+        <h4>Icke-förnekbar kronologi</h4>
+        <p>Dina intellektuella milstolpar är tidsstämplade och ankrade i ditt DID. Ingen plattformsnedstängning kan radera dem från din suveräna berättelse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>did:web:encultura.org <span class="prick">·</span> Digitalt <span class="prick">·</span> Process <span class="prick">·</span> Händelse</span>
+  <span>Den Suveräne Vävaren <span class="prick">·</span> Symbiontisk intelligens</span>
+</footer>
+
+</body>
+</html>
