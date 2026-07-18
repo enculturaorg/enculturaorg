@@ -1,10 +1,3 @@
-Claude actually makes a really fair point. Having eleven distinct steps—especially splitting up specific academic faculty titles like Assistant, Associate, and Full Professor—can feel a bit redundant since the core concepts stay similar, just wrapped in heavier academic jargon.
-
-We can condense the selector down to fewer, much cleaner options. This respects the traditional milestones without overcomplicating the interface, while keeping the focus exactly where it belongs: on your transition from deep, independent online scholarship to your formal undergraduate journey.
-
-Here is a streamlined version with just **six levels** (Kindergarten, Elementary, Middle School, High School, Undergraduate / Amateur Researcher, and Advanced Academic).
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -68,8 +61,8 @@ Here is a streamlined version with just **six levels** (Kindergarten, Elementary
                         <option value="elementary">Elementary School</option>
                         <option value="middle">Middle School</option>
                         <option value="high" selected>High School</option>
-                        <option value="undergrad">Undergraduate / Amateur Researcher</option>
-                        <option value="advanced">Advanced Academic Discourse</option>
+                        <option value="student">Academic Student</option>
+                        <option value="faculty">Academic Faculty</option>
                 </select>
                 <p style="font-size: 0.95em; color: #555; margin-top: 1em; margin-bottom: 1.5em; font-style: italic;">
                         We have compassion towards those with the most energy among us, and we respect the wisdom of those more competent than us.
@@ -113,8 +106,8 @@ const statements = {
         elementary: "Pontus studies old religions and old ideas about time. He loves two very old kinds of writings called the Gāthās and the tantras — they're about 2,000 years old! He wonders about big questions like \"why do things happen?\" and \"what's the point of everything?\" He thinks nothing was planned from the start. Instead, things slowly change over a long time, like a caterpillar turning into a butterfly.",
         middle: "Pontus Samani studies religion, especially very old texts called the Gāthās and the tantras. He's interested in questions about wisdom and purpose — why things exist and where they're headed. He also looks at math patterns and ideas about time that can't really be described in words. His main idea is that purpose isn't something decided by a god or a plan. Instead, it slowly develops over time as cultures change, kind of like how new inventions build on old ones.",
         high: "Pontus Edvard Samani is an undergraduate student and amateur unpublished researcher in religious studies, focused on ancient Zoroastrian philosophy (found in texts called the Gāthās) and on how certain traditions describe time and the divine using negation rather than direct description (called \"apophatic theology\"). He also studies mathematical structuralism and nondual traditions from the Indo-Iranian world, using tools like phenomenology (the study of experience) and hermeneutics (the study of interpretation). His central argument: purpose isn't designed by a creator or fixed in advance. It emerges naturally as cultures evolve, exploring new possibilities one step at a time — a process he sees recorded across 2,000 years in both the Gāthās and the tantras.",
-        undergrad: "Pontus Edvard Samani (b. 1989) is an undergraduate student and amateur unpublished researcher in religious studies. Having cultivated a deep conceptual foundation through years of independent online scholarship, he is now anchoring his work within formal academia. His current inquiries focus on Gāthic philosophy and the apophatic theology of time, alongside a parallel interest in mathematical structuralism and Indo-Iranian nondual traditions. Leaning on phenomenology and discourse analysis to parse questions of wisdom and telos (ultimate purpose), his tentative view is that purpose is an emergent property—arising naturalistically as cultures explore the \"adjacent possible\" across deep textual histories.",
-        advanced: "Pontus Edvard Samani (b. 1989) is an undergraduate student and amateur unpublished researcher whose foundational scholarship was forged through independent online research communities rather than traditional institutional tracks. Calibrated here to the high conceptual abstraction of advanced academic discourse, this statement synthesizes his inquiries into Gāthic philosophy and the apophatic theology of time. Drawing on phenomenology, hermeneutics, and mathematical structuralism to interrogate the architecture of wisdom traditions, he posits a naturalistic, non-teleological account of purpose: telos is neither designed nor decreed, but emerges as complex cultural systems evolve toward attractor states through the adjacent possible, crystallized over two millennia in the Gāthās and the tantras."
+        student: "Pontus Edvard Samani (b. 1989) is an undergraduate student and amateur unpublished researcher in religious studies. Having cultivated a deep conceptual foundation through years of independent online scholarship, he is now anchoring his work within formal academia. His current inquiries focus on Gāthic philosophy and the apophatic theology of time, alongside a parallel interest in mathematical structuralism and Indo-Iranian nondual traditions. Leaning on phenomenology and discourse analysis to parse questions of wisdom and telos (ultimate purpose), his tentative view is that purpose is an emergent property—arising naturalistically as cultures explore the \"adjacent possible\" across deep textual histories.",
+        faculty: "Pontus Edvard Samani (b. 1989) is an undergraduate student and amateur unpublished researcher whose foundational scholarship was forged through independent online research communities rather than traditional institutional tracks. Calibrated here to the high conceptual abstraction of academic faculty discourse, this statement synthesizes his inquiries into Gāthic philosophy and the apophatic theology of time. Drawing on phenomenology, hermeneutics, and mathematical structuralism to interrogate the architecture of wisdom traditions, he posits a naturalistic, non-teleological account of purpose: telos is neither designed nor decreed, but emerges as complex cultural systems evolve toward attractor states through the adjacent possible, crystallized over two millennia in the Gāthās and the tantras."
 };
 function updateStatement() {
         const selector = document.getElementById("level-select");
@@ -125,5 +118,3 @@ function updateStatement() {
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 </body>
 </html>
-
-```
