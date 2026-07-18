@@ -1,10 +1,136 @@
-<!DOCTYPE html><html lang="en"><head>    <meta charset="utf-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Encultura.org — Pontus Edvard Samani</title>    <meta name="description" content="Pontus Edvard Samani — Independent scholar of Gāthic philosophy and the apophatic theology of time.">    <link rel="canonical" href="https://encultura.org/">    <meta property="og:title" content="Encultura.org — Pontus Edvard Samani">    <meta property="og:description" content="Independent scholar of Gāthic philosophy and the apophatic theology of time.">    <meta property="og:url" content="https://encultura.org/">    <meta property="og:type" content="website">    <style>        body {             max-width: 40em;             margin: 4em auto;             padding: 0 1em;             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;             line-height: 1.6;             color: #222;         }        a { color: #0066cc; text-decoration: none; }        a:hover { text-decoration: underline; }        nav ul { padding: 0; list-style: none; margin: 1.5em 0; }        nav li { display: inline; }        nav li:not(:last-child)::after { content: " | "; color: #ccc; }        main { margin-top: 3em; }        .selector-container { margin-bottom: 1.5em; font-size: 0.95em; color: #555; }        select { padding: 0.4em; font-size: 0.95em; border-radius: 4px; border: 1px solid #ccc; background: #fff; cursor: pointer; }        p.statement { font-size: 1.1em; color: #111; text-align: justify; margin-bottom: 2em; min-height: 6em; }        .contact-section { margin-top: 2em; font-size: 1.1em; }        .phase-label { font-size: 0.85em; text-transform: uppercase; color: #666; letter-spacing: 0.05em; margin-right: 0.5em; }    </style>    <script type="application/ld+json">    {        "@context": "https://schema.org",        "@type": "Person",        "name": "Pontus Edvard Samani",        "birthDate": "1989",        "url": "https://encultura.org/",        "knowsAbout": ["Gathic philosophy", "Zoroastrianism", "Apophatic theology", "Phenomenology", "Religious Studies", "Epistemology"]    }    </script></head><body>
-<header>    <h1>Encultura.org</h1>    <nav aria-label="Main navigation">        <ul>            <li><a href="https://blog.encultura.org/subscribe">Subscribe to Edvard's writings</a></li>            <li><a href="https://notes.encultura.org/">Visit his digital notes</a></li>        </ul>    </nav></header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encultura.org — Pontus Edvard Samani</title>
+    <meta name="description" content="Pontus Edvard Samani — Independent scholar of Gāthic philosophy and the apophatic theology of time.">
+    <link rel="canonical" href="https://encultura.org/">
+    <meta property="og:title" content="Encultura.org — Pontus Edvard Samani">
+    <meta property="og:description" content="Independent scholar of Gāthic philosophy and the apophatic theology of time.">
+    <meta property="og:url" content="https://encultura.org/">
+    <meta property="og:type" content="website">
+    <style>
+        body { 
+            max-width: 40em; 
+            margin: 4em auto; 
+            padding: 0 1em; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #222; 
+        }
+        a { color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        nav ul { padding: 0; list-style: none; margin: 1.5em 0; }
+        nav li { display: inline; }
+        nav li:not(:last-child)::after { content: " | "; color: #ccc; }
+        main { margin-top: 3em; }
+        .selector-container { margin-bottom: 1.5em; font-size: 0.95em; color: #555; }
+        select { padding: 0.4em; font-size: 0.95em; border-radius: 4px; border: 1px solid #ccc; background: #fff; cursor: pointer; }
+        p.statement { font-size: 1.1em; color: #111; text-align: justify; margin-bottom: 2em; min-height: 6em; }
+        .contact-section { margin-top: 2em; font-size: 1.1em; }
+        .niche-label { font-size: 0.85em; text-transform: uppercase; color: #666; letter-spacing: 0.05em; margin-right: 0.5em; }
+    </style>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Pontus Edvard Samani",
+        "birthDate": "1989",
+        "url": "https://encultura.org/",
+        "knowsAbout": ["Gathic philosophy", "Zoroastrianism", "Apophatic theology", "Phenomenology", "Religious Studies", "Epistemology"]
+    }
+    </script>
+</head>
+<body>
+
+<header>
+    <h1>Encultura.org</h1>
+    <nav aria-label="Main navigation">
+        <ul>
+            <li><a href="https://blog.encultura.org/subscribe">Subscribe to Edvard's writings</a></li>
+            <li><a href="https://notes.encultura.org/">Visit his digital notes</a></li>
+        </ul>
+    </nav>
+</header>
+
 <hr>
-<main>    <div class="selector-container">        <label for="level-select">Reading Complexity: </label>        <select id="level-select" onchange="updateStatement()">            <option value="kindergarten">Kindergarten</option>            <option value="elementary">Elementary School</option>            <option value="middle">Middle School</option>            <option value="high" selected>High School</option>            <option value="undergrad">Undergraduate</option>            <option value="master">Graduate Student (Master's)</option>            <option value="phd">PhD Candidate</option>            <option value="postdoc">Postdoctoral Researcher</option>            <option value="assistant">Assistant Professor</option>            <option value="associate">Associate Professor</option>            <option value="full">Full Professor</option>        </select>    </div>
-    <p class="statement" id="biography-statement">        Pontus Edvard Samani is an independent researcher in religious studies, focused on ancient Zoroastrian philosophy (found in texts called the Gāthās) and on how certain traditions describe time and the divine using negation rather than direct description (called "apophatic theology"). He also studies mathematical structuralism and nondual traditions from the Indo-Iranian world, using tools like phenomenology (the study of experience) and hermeneutics (the study of interpretation). His central argument: purpose isn't designed by a creator or fixed in advance. It emerges naturally as cultures evolve, exploring new possibilities one step at a time — a process he sees recorded across 2,000 years in both the Gāthās and the tantras.    </p>
-    <section style="margin-top: 3em;">        <hr>        <h2>The Logic of Emergence</h2>        <ul style="padding: 0; list-style: none;">            <li style="margin: 0.8em 0;">                <span class="phase-label">Phase I (Process Only):</span>                 <strong>Śākta &amp; Śaiva Religion:</strong>                 <a href="https://ochs.org.uk/tantra-in-south-asia-sakta-and-saiva-religion-from-kashmir/" target="_blank" rel="noopener">Oxford Centre for Hindu Studies</a>            </li>            <li style="margin: 0.8em 0;">                <span class="phase-label">Phase II (Process and Event):</span>                 <strong>Gāthic Studies:</strong>                 <a href="https://gatha.org/" target="_blank" rel="noopener">The Zarathushtrian Assembly</a>            </li>            <li style="margin: 0.8em 0;">                <span class="phase-label">Phase III (Event Only):</span>                 <strong>Academic Religion Studies:</strong>                 <a href="https://www.uu.se/institution/teologiska/utbildning" target="_blank" rel="noopener">Uppsala University</a>            </li>        </ul>    </section>
+
+<main>
+    <div class="selector-container">
+        <label for="level-select">Reading Complexity: </label>
+        <select id="level-select" onchange="updateStatement()">
+            <option value="kindergarten">Kindergarten</option>
+            <option value="elementary">Elementary School</option>
+            <option value="middle">Middle School</option>
+            <option value="high" selected>High School</option>
+            <option value="undergrad">Undergraduate</option>
+            <option value="master">Graduate Student (Master's)</option>
+            <option value="phd">PhD Candidate</option>
+            <option value="postdoc">Postdoctoral Researcher</option>
+            <option value="assistant">Assistant Professor</option>
+            <option value="associate">Associate Professor</option>
+            <option value="full">Full Professor</option>
+        </select>
+    </div>
+
+    <p class="statement" id="biography-statement">
+        Pontus Edvard Samani is an independent researcher in religious studies, focused on ancient Zoroastrian philosophy (found in texts called the Gāthās) and on how certain traditions describe time and the divine using negation rather than direct description (called "apophatic theology"). He also studies mathematical structuralism and nondual traditions from the Indo-Iranian world, using tools like phenomenology (the study of experience) and hermeneutics (the study of interpretation). His central argument: purpose isn't designed by a creator or fixed in advance. It emerges naturally as cultures evolve, exploring new possibilities one step at a time — a process he sees recorded across 2,000 years in both the Gāthās and the tantras.
+    </p>
+
+    <section style="margin-top: 3em;">
+        <hr>
+        <h2>Niches of Conceptual Emergence</h2>
+        <p style="font-size: 0.95em; color: #555; margin-bottom: 1.5em;">
+            These primary domains map the development of my research across distinct modalities of thought, outlining key spaces of conceptual inspiration alongside formal institutional framework.
+        </p>
+        <ul style="padding: 0; list-style: none;">
+            <li style="margin: 0.8em 0;">
+                <span class="niche-label">Inspiration (Process &amp; Event):</span> 
+                <strong>Gāthic Studies:</strong> 
+                <a href="https://gatha.org/" target="_blank" rel="noopener">The Zarathushtrian Assembly</a>
+            </li>
+            <li style="margin: 0.8em 0;">
+                <span class="niche-label">Inspiration (Process Only):</span> 
+                <strong>Śākta &amp; Śaiva Religion:</strong> 
+                <a href="https://ochs.org.uk/tantra-in-south-asia-sakta-and-saiva-religion-from-kashmir/" target="_blank" rel="noopener">Oxford Centre for Hindu Studies</a>
+            </li>
+            <li style="margin: 0.8em 0;">
+                <span class="niche-label">Enrollment (Event Only):</span> 
+                <strong>Academic Religion Studies:</strong> 
+                <a href="https://www.uu.se/institution/teologiska/utbildning" target="_blank" rel="noopener">Uppsala University</a>
+            </li>
+        </ul>
+    </section>
+
     <hr>
-    <div class="contact-section">        <p>Contact: <a href="/cdn-cgi/l/email-protection#d8bdbcaeb9aabcf6abb9b5b9b6b198bdb6bbadb4acadaab9f6b7aabf"><span class="__cf_email__" data-cfemail="761312001704125805171b17181f36131815031a0203041758190411">[email&#160;protected]</span></a></p>    </div></main>
-<script>const statements = {    kindergarten: "Pontus likes big questions. Like \"why are we here?\" He reads old, old stories. He thinks things don't come from a plan — they just grow, bit by bit, like a seed becomes a flower.",    elementary: "Pontus studies old religions and old ideas about time. He loves two very old kinds of writings called the Gāthās and the tantras — they're about 2,000 years old! He wonders about big questions like \"why do things happen?\" and \"what's the point of everything?\" He thinks nothing was planned from the start. Instead, things slowly change over a long time, like a caterpillar turning into a butterfly.",    middle: "Pontus Samani studies religion, especially very old texts called the Gāthās and the tantras. He's interested in questions about wisdom and purpose — why things exist and where they're headed. He also looks at math patterns and ideas about time that can't really be described in words. His main idea is that purpose isn't something decided by a god or a plan. Instead, it slowly develops over time as cultures change, kind of like how new inventions build on old ones.",    high: "Pontus Edvard Samani is an independent researcher in religious studies, focused on ancient Zoroastrian philosophy (found in texts called the Gāthās) and on how certain traditions describe time and the divine using negation rather than direct description (called \"apophatic theology\"). He also studies mathematical structuralism and nondual traditions from the Indo-Iranian world, using tools like phenomenology (the study of experience) and hermeneutics (the study of interpretation). His central argument: purpose isn't designed by a creator or fixed in advance. It emerges naturally as cultures evolve, exploring new possibilities one step at a time — a process he sees recorded across 2,000 years in both the Gāthās and the tantras.",    undergrad: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies who has spent years with Gāthic philosophy and the apophatic theology of time, alongside a growing interest in mathematical structuralism and Indo-Iranian nondual traditions. Drawing loosely on phenomenology, hermeneutics, and discourse analysis, he has been thinking through questions of wisdom and telos (ultimate purpose). His tentative view is that purpose isn't designed by an external agent or fixed by decree, but instead emerges as cultures evolve toward stable \"attractor\" states through what complexity theorists call the \"adjacent possible\" — a pattern he thinks might be traceable across the Gāthās and the tantras, two millennia-long textual traditions.",    master: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies whose ongoing work returns again and again to Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and Indo-Iranian nondual traditions as areas he continues to explore alongside it. He tries to bring phenomenology, hermeneutics, and discourse analysis to bear on questions of wisdom and telos. His working hypothesis is that purpose is neither designed nor decreed, but emerges — he suspects — as cultures evolve toward attractor states via the adjacent possible, a dynamic he tentatively locates within the two-millennia textual traditions of the Gāthās and the tantras.",    phd: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies whose work keeps returning to Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as supporting interests. He draws, not always systematically, on phenomenological, hermeneutic, and discourse-analytic approaches to think about the relationship between wisdom traditions and questions of telos. His central hunch — offered tentatively — is that purpose is neither externally designed nor divinely decreed, but emerges as cultures evolve toward attractor states through the adjacent possible, a pattern he thinks he can trace, imperfectly, across the Gāthās and the tantras.",    postdoc: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies whose modest research program keeps circling back to Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the comparative study of Indo-Iranian nondual traditions as supporting threads. Methodologically he leans on phenomenology, hermeneutics, and discourse analysis, more as tools to think with than as a settled method, to sit with the entanglement of wisdom traditions and teleological questions. What he has to offer is a naturalistic, non-teleological account of purpose in which telos is neither externally designed nor divinely decreed, but emerges — he believes, though he holds this loosely — as cultures evolve toward attractor states through the adjacent possible, a framework he tries to support through comparative, still-unfinished readings of the Gāthās and the tantras.",    assistant: "Pontus Edvard Samani (b. 1989) is a researcher in religious studies whose work centers on Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as supporting interests that inform this central inquiry. His work draws, unevenly, on phenomenology, hermeneutics, and discourse analysis to think about the intersecting questions of wisdom and telos. He has come to suspect — though he holds the claim tentatively — that purpose is neither designed nor decreed, but emerges, within a naturalistic frame, as cultures evolve toward attractors through the adjacent possible, with the Gāthās and the tantras offered as two millennia-deep textual witnesses to this process, read suggestively rather than conclusively.",    associate: "Pontus Edvard Samani (b. 1989) is a researcher in religious studies whose work centers on Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as long-standing supporting interests. His work draws on phenomenology, hermeneutics, and discourse analysis to sit with longstanding questions of wisdom and telos. On his view, held tentatively across years of reading, purpose is neither designed nor decreed: it emerges, within a naturalistic frame, as cultures evolve toward attractors through the adjacent possible — and the Gāthās and the tantras stand as two millennia-deep records of that process, which he reads comparatively, aware that the comparison is itself an open question.",    full: "Pontus Edvard Samani (b. 1989) is a student of religious studies whose independent research centers on Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as auxiliary disciplines. His work draws on phenomenology, hermeneutics, and discourse analysis to address questions of wisdom and telos. On his view, purpose is neither designed nor decreed: it emerges, within a naturalistic frame, as cultures evolve toward attractors through the adjacent possible — and the Gāthās and the tantras stand as two millennia-deep records of that process."};
-function updateStatement() {    const selector = document.getElementById("level-select");    const textElement = document.getElementById("biography-statement");    textElement.textContent = statements[selector.value];}</script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>
+
+    <div class="contact-section">
+        <p>Contact: <a href="/cdn-cgi/l/email-protection#d8bdbcaeb9aabcf6abb9b5b9b6b198bdb6bbadb4acadaab9f6b7aabf"><span class="__cf_email__" data-cfemail="761312001704125805171b17181f36131815031a0203041758190411">[email&#160;protected]</span></a></p>
+    </div>
+</main>
+
+<script>
+const statements = {
+    kindergarten: "Pontus likes big questions. Like \"why are we here?\" He reads old, old stories. He thinks things don't come from a plan — they just grow, bit by bit, like a seed becomes a flower.",
+    elementary: "Pontus studies old religions and old ideas about time. He loves two very old kinds of writings called the Gāthās and the tantras — they're about 2,000 years old! He wonders about big questions like \"why do things happen?\" and \"what's the point of everything?\" He thinks nothing was planned from the start. Instead, things slowly change over a long time, like a caterpillar turning into a butterfly.",
+    middle: "Pontus Samani studies religion, especially very old texts called the Gāthās and the tantras. He's interested in questions about wisdom and purpose — why things exist and where they're headed. He also looks at math patterns and ideas about time that can't really be described in words. His main idea is that purpose isn't something decided by a god or a plan. Instead, it slowly develops over time as cultures change, kind of like how new inventions build on old ones.",
+    high: "Pontus Edvard Samani is an independent researcher in religious studies, focused on ancient Zoroastrian philosophy (found in texts called the Gāthās) and on how certain traditions describe time and the divine using negation rather than direct description (called \"apophatic theology\"). He also studies mathematical structuralism and nondual traditions from the Indo-Iranian world, using tools like phenomenology (the study of experience) and hermeneutics (the study of interpretation). His central argument: purpose isn't designed by a creator or fixed in advance. It emerges naturally as cultures evolve, exploring new possibilities one step at a time — a process he sees recorded across 2,000 years in both the Gāthās and the tantras.",
+    undergrad: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies who has spent years with Gāthic philosophy and the apophatic theology of time, alongside a growing interest in mathematical structuralism and Indo-Iranian nondual traditions. Drawing loosely on phenomenology, hermeneutics, and discourse analysis, he has been thinking through questions of wisdom and telos (ultimate purpose). His tentative view is that purpose isn't designed by an external agent or fixed by decree, but instead emerges as cultures evolve toward stable \"attractor\" states through what complexity theorists call the \"adjacent possible\" — a pattern he thinks might be traceable across the Gāthās and the tantras, two millennia-long textual traditions.",
+    master: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies whose ongoing work returns again and again to Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and Indo-Iranian nondual traditions as areas he continues to explore alongside it. He tries to bring phenomenology, hermeneutics, and discourse analysis to bear on questions of wisdom and telos. His working hypothesis is that purpose is neither designed nor decreed, but emerges — he suspects — as cultures evolve toward attractor states via the adjacent possible, a dynamic he tentatively locates within the two-millennia textual traditions of the Gāthās and the tantras.",
+    phd: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies whose work keeps returning to Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as supporting interests. He draws, not always systematically, on phenomenological, hermeneutic, and discourse-analytic approaches to think about the relationship between wisdom traditions and questions of telos. His central hunch — offered tentatively — is that purpose is neither externally designed nor divinely decreed, but emerges as cultures evolve toward attractor states through the adjacent possible, a pattern he thinks he can trace, imperfectly, across the Gāthās and the tantras.",
+    postdoc: "Pontus Edvard Samani (b. 1989) is an independent researcher in religious studies whose modest research program keeps circling back to Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the comparative study of Indo-Iranian nondual traditions as supporting threads. Methodologically he leans on phenomenology, hermeneutics, and discourse analysis, more as tools to think with than as a settled method, to sit with the entanglement of wisdom traditions and teleological questions. What he has to offer is a naturalistic, non-teleological account of purpose in which telos is neither externally designed nor divinely decreed, but emerges — he believes, though he holds this loosely — as cultures evolve toward attractor states through the adjacent possible, a framework he tries to support through comparative, still-unfinished readings of the Gāthās and the tantras.",
+    assistant: "Pontus Edvard Samani (b. 1989) is a researcher in religious studies whose work centers on Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as supporting interests that inform this central inquiry. His work draws, unevenly, on phenomenology, hermeneutics, and discourse analysis to think about the intersecting questions of wisdom and telos. He has come to suspect — though he holds the claim tentatively — that purpose is neither designed nor decreed, but emerges, within a naturalistic frame, as cultures evolve toward attractors through the adjacent possible, with the Gāthās and the tantras offered as two millennia-deep textual witnesses to this process, read suggestively rather than conclusively.",
+    associate: "Pontus Edvard Samani (b. 1989) is a researcher in religious studies whose work centers on Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as long-standing supporting interests. His work draws on phenomenology, hermeneutics, and discourse analysis to sit with longstanding questions of wisdom and telos. On his view, held tentatively across years of reading, purpose is neither designed nor decreed: it emerges, within a naturalistic frame, as cultures evolve toward attractors through the adjacent possible — and the Gāthās and the tantras stand as two millennia-deep records of that process, which he reads comparatively, aware that the comparison is itself an open question.",
+    full: "Pontus Edvard Samani (b. 1989) is a student of religious studies whose independent research centers on Gāthic philosophy and the apophatic theology of time, with mathematical structuralism and the study of Indo-Iranian nondual traditions as auxiliary disciplines. His work draws on phenomenology, hermeneutics, and discourse analysis to address questions of wisdom and telos. On his view, purpose is neither designed nor decreed: it emerges, within a naturalistic frame, as cultures evolve toward attractors through the adjacent possible — and the Gāthās and the tantras stand as two millennia-deep records of that process."
+};
+
+function updateStatement() {
+    const selector = document.getElementById("level-select");
+    const textElement = document.getElementById("biography-statement");
+    textElement.textContent = statements[selector.value];
+}
+</script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+</body>
+</html>
