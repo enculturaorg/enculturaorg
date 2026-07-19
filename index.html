@@ -3,13 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encultura.org — Pontus Edvard Samani</title>
-    <meta name="description" content="Pontus Edvard Samani — Student i Religionsvetenskap vid Uppsala universitet som utforskar livsåskådningsfrågor, religionens varför och historiens vad.">
-    <link rel="canonical" href="https://encultura.org/">
-    <meta property="og:title" content="Encultura.org — Pontus Edvard Samani">
-    <meta property="og:description" content="Student i Religionsvetenskap vid Uppsala universitet som utforskar livsåskådningsfrågor, religionens varför och historiens vad.">
-    <meta property="og:url" content="https://encultura.org/">
-    <meta property="og:type" content="website">
+    <title>Encultura.org — Redigerbar demo</title>
     <style>
         body {
             max-width: 40em;
@@ -19,66 +13,61 @@
             line-height: 1.6;
             color: #222;
         }
-        a { color: #0066cc; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        nav ul { padding: 0; list-style: none; margin: 1.5em 0; }
-        nav li { display: inline; }
-        nav li:not(:last-child)::after { content: " | "; color: #ccc; }
         main { margin-top: 3em; }
-        p { font-size: 1.1em; color: #111; text-align: justify; margin-bottom: 1.5em; }
-        .contact-section { margin-top: 3em; font-size: 1.1em; }
+        
+        /* Visar läsaren att texten går att klicka på och ändra */
+        .editable-area {
+            padding: 1em;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
+            background: #fafafa;
+            outline: none;
+        }
+        .editable-area:focus {
+            border-color: #0066cc;
+            background: #fff;
+        }
+        .status-tag {
+            font-size: 0.8em;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 0.5em;
+            display: block;
+        }
     </style>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Pontus Edvard Samani",
-        "birthDate": "1989",
-        "url": "https://encultura.org/",
-        "knowsAbout": ["Religious Studies", "Philosophy of Religion", "Abrahamic Religions", "Sanskrit and Avestan texts", "Secularism"]
-    }
-    </script>
 </head>
 <body>
 
 <header>
     <h1>Encultura.org</h1>
-    <nav aria-label="Huvudnavigering">
-        <ul>
-            <li><a href="https://blog.encultura.org/subscribe">Prenumerera på Edvards texter</a></li>
-            <li><a href="https://notes.encultura.org/">Besök hans digitala anteckningar</a></li>
-        </ul>
-    </nav>
+    <span class="status-tag">Klicka i texten nedan för att ändra den. Ändringarna sparas bara på din dator.</span>
 </header>
 
 <hr>
 
 <main>
-    <div>
+    <!-- contenteditable="true" gör att texten går att skriva i direkt på skärmen -->
+    <div id="my-text-area" class="editable-area" contenteditable="true">
         <p>Bästa Läsare,</p>
-        
         <p>Hej! Mitt namn är Edvard.</p>
-        
-        <p>I mina tankar och studier återkommer jag ständigt till frågan <em>varför?</em> – vilket är själva pulsen bakom all religion. Detta ställer jag i relation till en annan fråga: <em>vad?</em> – vilket är drivkraften och nyfikenheten bakom all historia. Till syvende och sist kokar detta ner till ren praktik och mänsklig erfarenhet.</p>
-        
-        <p>Jag är student inom Religionsvetarprogrammet vid Teologiska institutionen vid <a href="https://www.uu.se/institution/teologiska/utbildning" target="_blank" rel="noopener">Uppsala universitet</a>, efter att ha tagit något av en 20-årig omväg innan jag landade i akademin. I dagens Sverige möter vi en demokratisk och demografisk utmaning som i högsta grad handlar om sekulära livsåskådningsfrågor. Det är just därför de abrahamitiska rötterna – genom hebreisk, grekisk och arabisk religion – förblir så relevanta. Samtidigt ser vi hur allmänheten, som ofta har en sekulärprotestantisk grund, gärna söker efter svar i sanskrit- och avestatexter.</p>
-        
-        <p>Den existentiella krisen i vår tid handlar i grunden om detta <em>varför</em>, vilket i grunden är en religiös fråga. Varför ska jag ingå i ett exklusivt partnerskap? Varför ska jag gå upp till ett arbete varje morgon? Som du märker rör sig dessa frågor snabbt mot vad det egentligen handlar om: reproduktion, försörjning och beskydd – strukturer som kräver ett fundamentalt <em>varför</em> för att fungera. Det som först framstod som ett ogripbart <em>varför</em> blir därmed begripligt som ett konkret <em>vad</em>.</p>
-        
-        <p>Därför är det avgörande att skilja på levande religion och dess historia. Ett exklusivt partnerskap handlar inte bara om sex som en biologisk process; det vilar på den abrahamitiska kärleken som ideal. På samma sätt handlar arbete inte bara om mat för dagen; det vilar på den sekulära meritokratin som ideal.</p>
-        
-        <p>Vår tid på denna jorden är begränsad, vi ska alla dö och de abrahamitiska och sekulära livsåskådningarna har inga bra svar här. Om visdom är hur vi alla möter döden ensamma, så är medmänsklighet hur vi möter varandra i det dagliga livet här och nu.</p>
-        
-        <p>Hälsningar,<br>
-        <strong>Pontus Edvard Samani</strong></p>
-    </div>
-
-    <hr>
-
-    <div class="contact-section">
-        <p>Kontakt: <a href="mailto:edvard@encultura.org">edvard@encultura.org</a></p>
+        <p>Det här är en text som du kan klicka på och skriva om precis som du vill. Testa att radera detta eller skriva något eget, ladda sedan om sidan (F5) så ser du att dina ändringar är kvar!</p>
     </div>
 </main>
+
+<script>
+    var textArea = document.getElementById('my-text-area');
+
+    // 1. Kolla om det finns sparad text i Local Storage när sidan laddas
+    var savedText = localStorage.getItem('userEditedText');
+    if (savedText) {
+        textArea.innerHTML = savedText;
+    }
+
+    // 2. Lyssna på när användaren skriver (input) och spara direkt
+    textArea.addEventListener('input', function() {
+        localStorage.setItem('userEditedText', textArea.innerHTML);
+    });
+</script>
 
 </body>
 </html>
