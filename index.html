@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edvard Samani</title>
+    <title>Edvard Samani - Bortom kartan</title>
     <style>
         body {
             max-width: 40em;
@@ -14,7 +14,7 @@
             color: #222;
         }
         main { margin-top: 3em; }
-            
+                    
         /* Visar läsaren att texten går att klicka på och ändra */
         .editable-area {
             padding: 1em;
@@ -39,16 +39,23 @@
             color: #0066cc;
             text-decoration: underline;
         }
+        .editable-area h2 {
+            margin-top: 0.2em;
+            font-weight: normal;
+            color: #555;
+            font-size: 1.3em;
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1>Encultura.org</h1>
     <span class="status-tag">Klicka i texten nedan för att ändra den. Ändringarna sparas bara på din dator.</span>
 </header>
 <hr>
 <main>
     <article id="my-text-area" class="editable-area" contenteditable="true" itemscope itemtype="https://schema.org/Person">
+        <h1>Encultura.org</h1>
+        <h2>Bortom kartan</h2>
         <p>Jag vill vara närvarande i de relationer som finns nu, men jag fortsätter att systematisera abstrakta kartor som alltid bara kan vara en tolkning. Det är klart för mig nu att agens utan gemenskap leder ingenstans.</p>
         <p>Biokemi som är grunden för djuriska instinkter som dopamin, serotonin och oxytocin driver personlighet via agens och gemenskap – de två som med mer nyanser kallas för femfaktormodellen. Och det som personer på ett kulturellt plan upplever som inbjudan och överlämnande.</p>
         <p>Jag är medveten om detta nu.</p>
@@ -58,13 +65,17 @@
 </main>
 <script>
     var textArea = document.getElementById('my-text-area');
+    
     // 1. Kolla om det finns sparad text i Local Storage när sidan laddas
     var savedText = localStorage.getItem('userEditedText');
     if (savedText) {
         textArea.innerHTML = savedText;
     }
+    
     // 2. Lyssna på när användaren skriver (input) och spara direkt
     textArea.addEventListener('input', function() {
         localStorage.setItem('userEditedText', textArea.innerHTML);
     });
-</script></body></html>
+</script>
+</body>
+</html>
