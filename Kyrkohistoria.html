@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sv"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kristendomens historia – memoreringsspel</title>
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#2a2118;--mut:#7a6d5c;--acc:#8b3a2f;--acc2:#b8892b;--ok:#2e7d4f;--bad:#b3261e;--line:#e2d8c4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1713;--card:#262019;--ink:#f0e8da;--mut:#a89a85;--acc:#e0806f;--acc2:#e3b65a;--ok:#6fcf97;--bad:#ff8a80;--line:#3a3227}}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 Georgia,"Times New Roman",serif}
+.w{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:0}header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.xp{background:var(--acc);color:#fff;border-radius:99px;padding:2px 14px;font:600 .9rem system-ui,sans-serif}
+nav{display:flex;gap:6px;margin:14px 0;overflow-x:auto}
+nav button,.b{font:600 .9rem system-ui,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:8px 14px;cursor:pointer}
+nav button.on,.b.p{background:var(--acc);color:#fff;border-color:var(--acc)}
+.c{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin:10px 0}
+.n{font:700 .75rem system-ui,sans-serif;color:var(--acc2);letter-spacing:.08em;text-transform:uppercase}
+.c h3{margin:2px 0 6px;font-size:1.1rem}
+mark{background:none;color:var(--acc);font-weight:700;border-bottom:2px solid var(--acc2)}
+.hide mark{color:transparent;background:var(--line);border-radius:4px;border:0;cursor:pointer;user-select:none}
+.hide mark:hover,.hide mark.s{color:var(--acc);background:none}
+input.g{font:inherit;border:0;border-bottom:2px solid var(--acc2);background:transparent;color:var(--ink);text-align:center;padding:0 2px;margin:0 2px;outline:none;max-width:100%}
+input.g.ok{border-color:var(--ok);color:var(--ok);font-weight:700}input.g.bad{border-color:var(--bad);color:var(--bad)}
+.bar{height:6px;background:var(--line);border-radius:9px;overflow:hidden;margin:6px 0 12px}.bar i{display:block;height:100%;background:var(--acc2)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;font:inherit;font-size:.98rem;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,transparent)}.opt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,transparent)}
+.chip{font:600 .92rem system-ui,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;cursor:pointer}
+.chip.bad{border-color:var(--bad);color:var(--bad)}.chip.used{opacity:.3;pointer-events:none}
+.msg{font:600 .95rem system-ui,sans-serif;margin-top:10px}.ok-t{color:var(--ok)}.bad-t{color:var(--bad)}
+.mut{color:var(--mut);font-size:.9rem}.big{text-align:center;padding:24px 8px}.big b{font-size:2rem;color:var(--acc)}
+</style></head><body><div class="w">
+<header><h1>⛪ Kristendomens historia</h1><span class="xp">XP <span id="xp">0</span></span></header>
+<nav id="nav"></nav><main id="app"></main></div>
+<script>
+const P=[
+{t:"Ritualen",x:"Kristendomen börjar som en gemenskap kring [[gudstjänst]] och [[nattvard]], med rötter i [[judisk tradition]], och det är i [[ritualen]] man först ser vad som håller gruppen samman."},
+{t:"Dopet",x:"Gemenskapen tar in nya medlemmar genom en [[initiationsrit]] ([[dopet]]), som visar hur den tidiga kyrkan definierade [[vem som hörde till]]."},
+{t:"Auktoritet",x:"När konkurrerande grupper hotade enheten byggde [[huvudkyrkan]] auktoritet genom [[kanon]], [[trosregel]] och [[biskopsämbete]], alla tillbakaförda på [[apostlarna]]."},
+{t:"Dogmerna",x:"Med den auktoriteten och [[kejsarens]] stöd kunde kyrkan fastställa dogmerna om [[Kristus]] och [[treenigheten]] och avvisa [[avvikande läror]]."},
+{t:"De utanför",x:"När kyrkan blev en [[dominerande makt]] i Europa fick den också ett förhållningssätt till dem utanför, som [[judar]], [[muslimer]], [[hedningar]] och [[kättare]]."},
+{t:"Splittringen",x:"Tvister och maktkamper delade upp kristenheten i [[ortodoxa]], [[orientaliska]], [[katolska]] och slutligen [[protestantiska]] kyrkor."},
+{t:"Reformationen",x:"Reformationen, den [[största splittringen]], [[rensade ut]] stora delar av det [[medeltida religiösa universumet]] och gav olika [[konfessioner]] olika profiler."},
+{t:"Global katolicism",x:"Samtidigt spred sig den katolska kyrkan [[globalt]] med [[kolonialmakterna]], i [[Latinamerika]] som del av [[erövringen]] och i [[Asien]] genom [[anpassning]] och [[elitmission]]."},
+{t:"Modernitetens utmaning",x:"När kristendomen mötte [[upplysning]], [[vetenskap]] och [[sekularisering]] i Europa svarade de olika kyrkorna med [[motstånd]], [[anpassning]] eller [[förnyelse]]."},
+{t:"Asiatisk kristendom",x:"Bakom hela den europeiska berättelsen finns också en [[äldre kristendom i Asien]], som växte fram redan i [[antiken]] och sedan blev en [[minoritet]]."},
+{t:"Afrikansk kristendom",x:"På samma sätt finns en tidig afrikansk kristendom ([[Egypten]], [[Nubien]], [[Etiopien]]) som ofta [[glöms bort]] och som senare följdes av nya [[missionsvågor]] och [[afrikanska kyrkor]]."},
+{t:"Flexibiliteten",x:"Det som binder ihop allt är kristendomens [[flexibilitet]]: förmågan att [[översätta sig]] till nya [[språk]], [[kulturer]] och [[maktförhållanden]] och på så sätt [[överleva]] som [[historisk kraft]]."}];
+const $=s=>document.querySelector(s),app=$("#app");
+const sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const nz=s=>s.toLowerCase().replace(/[^a-zåäö0-9 ]/g,"").replace(/\s+/g," ").trim();
+function lev(a,b){const d=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]==b[j-1]?0:1));p=t}}return d[b.length]}
+const close=(a,b)=>{a=nz(a);b=nz(b);return a==b||(b.length>5&&a.length>2&&lev(a,b)<=1)};
+let xp=0;try{xp=+localStorage.getItem("kx")||0}catch(e){}
+const addXp=n=>{xp=Math.max(0,xp+n);try{localStorage.setItem("kx",xp)}catch(e){}$("#xp").textContent=xp};addXp(0);
+const hl=x=>x.replace(/\[\[(.+?)\]\]/g,"<mark>$1</mark>");
+const tabs=[["lar","📖 Läs"],["luckor","✍️ Luckor"],["ordning","🔢 Ordning"],["quiz","❓ Quiz"]];
+function go(m){$("#nav").innerHTML=tabs.map(([k,l])=>`<button class="${k==m?"on":""}" onclick="go('${k}')">${l}</button>`).join("");({lar,luckor,ordning,quiz})[m]()}
+/* LÄS */
+function lar(){
+app.innerHTML=`<p class="mut">Steg 1: Läs punkterna. Slå sedan på “Dölj nyckelord” och försök minnas varje markerat begrepp – klicka för att avslöja. Spela därefter de andra lägena.</p>
+<div class="row"><button class="b p" id="tg">Dölj nyckelord</button></div><div id="L">`+P.map((p,i)=>`<div class="c"><div class="n">Punkt ${i+1}</div><h3>${p.t}</h3><div>${hl(p.x)}</div></div>`).join("")+`</div>`;
+$("#tg").onclick=e=>{const h=$("#L").classList.toggle("hide");e.target.textContent=h?"Visa nyckelord":"Dölj nyckelord"};
+$("#L").onclick=e=>{if(e.target.tagName=="MARK")e.target.classList.toggle("s")}}
+/* LUCKOR */
+let C;
+function luckor(){C={o:sh(P.map((_,i)=>i)),i:0,sc:0};cl()}
+function cl(){
+if(C.i>=12){app.innerHTML=`<div class="c big"><b>${C.sc}</b> XP<p>Alla 12 punkter genomgångna! Kör igen tills inget behöver ledtrådar.</p><button class="b p" onclick="luckor()">Spela om</button></div>`;return}
+const p=P[C.o[C.i]];C.h=0;C.f=0;
+const parts=p.x.split(/\[\[(.+?)\]\]/);
+app.innerHTML=`<div class="bar"><i style="width:${C.i/12*100}%"></i></div><div class="c"><div class="n">Punkt ${C.o[C.i]+1} av 12 · ${p.t}</div><p id="t">`+parts.map((s,k)=>k%2?`<input class="g" data-a="${s}" size="${s.length+1}" autocomplete="off" autocapitalize="off" spellcheck="false">`:s).join("")+`</p>
+<div class="row"><button class="b p" id="ck">Kolla</button><button class="b" id="hn">Ledtråd (−3)</button><button class="b" id="sa">Visa svar</button></div><div class="msg" id="m"></div></div>`;
+const ins=[...document.querySelectorAll("input.g")];ins[0].focus();
+ins.forEach(n=>n.onkeydown=e=>{if(e.key=="Enter")$("#ck").click()});
+$("#hn").onclick=()=>{C.h=1;ins.forEach(n=>{if(!n.classList.contains("ok"))n.placeholder=n.dataset.a[0]+"…"});addXp(-3);C.sc-=3};
+$("#sa").onclick=()=>{C.f=9;ins.forEach(n=>{n.value=n.dataset.a;n.classList.add("ok")});fin(0)};
+$("#ck").onclick=()=>{let all=1;ins.forEach(n=>{const ok=close(n.value,n.dataset.a);n.classList.toggle("ok",ok);n.classList.toggle("bad",!ok);if(ok)n.value=n.dataset.a;else all=0});
+if(all){const g=ins.length*10-(C.f*3);fin(Math.max(g,5))}else{C.f++;$("#m").innerHTML='<span class="bad-t">Nästan – rätta de röda luckorna.</span>'}}}
+function fin(g){addXp(g);C.sc+=g;$("#m").innerHTML=`<span class="ok-t">${g?"Rätt! +"+g+" XP":"Svar visat – repetera punkten."}</span>`;
+$("#ck").style.display=$("#hn").style.display=$("#sa").style.display="none";
+const b=document.createElement("button");b.className="b p";b.textContent="Nästa →";b.onclick=()=>{C.i++;cl()};document.querySelector(".row").append(b);b.focus()}
+/* ORDNING */
+let O;
+function ordning(){O={n:0,err:0,pool:sh(P.map((_,i)=>i))};od()}
+function od(){
+app.innerHTML=`<p class="mut">Tryck på rubrikerna i den ordning berättelsen följer, från början till slut. Fel kostar 2 XP.</p>
+<div class="c" id="got">${O.n?P.slice(0,O.n).map((p,i)=>`<div><span class="n">${i+1}</span> ${p.t}</div>`).join(""):'<span class="mut">Börja med punkt 1…</span>'}</div>
+<div class="row" id="pool">${O.pool.map(i=>`<button class="chip ${i<O.n?"used":""}" data-i="${i}">${P[i].t}</button>`).join("")}</div><div class="msg" id="m"></div>`;
+$("#pool").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;const i=+b.dataset.i;
+if(i==O.n){O.n++;addXp(5);if(O.n==12){app.innerHTML=`<div class="c big"><b>${O.err}</b> fel<p>${O.err?"Försök igen för full pott!":"Perfekt ordning! 🎉"}</p><button class="b p" onclick="ordning()">Spela om</button></div>`;if(!O.err)addXp(30);return}od()}
+else{O.err++;addXp(-2);b.classList.add("bad");$("#m").innerHTML=`<span class="bad-t">Inte den. Nästa punkt är nummer ${O.n+1}.</span>`}}}
+/* QUIZ */
+let Q;
+function quiz(){const qs=[];for(let k=0;k<10;k++){const i=Math.random()*12|0;if(k%2&&i<11)qs.push({ty:"b",i});else qs.push({ty:"a",i})}Q={qs,k:0,sc:0};qq()}
+function qq(){
+if(Q.k>=10){app.innerHTML=`<div class="c big"><b>${Q.sc}/10</b><p>${Q.sc>8?"Utmärkt minne!":"Bra – kör igen och skärp detaljerna."}</p><button class="b p" onclick="quiz()">Ny omgång</button></div>`;return}
+const q=Q.qs[Q.k],p=P[q.i],ans=q.ty=="a"?q.i:q.i+1;
+const opts=sh([ans,...sh(P.map((_,i)=>i).filter(i=>i!=ans)).slice(0,3)]);
+const text=q.ty=="a"?`Vilken punkt beskrivs här?<br><i>${p.x.replace(/\[\[(.+?)\]\]/g,"▒▒▒")}</i>`:`Vilken punkt kommer direkt efter <b>“${p.t}”</b> i berättelsen?`;
+app.innerHTML=`<div class="bar"><i style="width:${Q.k*10}%"></i></div><div class="c"><div class="n">Fråga ${Q.k+1} av 10</div><p>${text}</p><div id="o">${opts.map(i=>`<button class="opt" data-i="${i}">${P[i].t}</button>`).join("")}</div><div class="msg" id="m"></div></div>`;
+$("#o").onclick=e=>{const b=e.target.closest(".opt");if(!b||$("#o").dataset.d)return;$("#o").dataset.d=1;const ok=+b.dataset.i==ans;
+document.querySelectorAll(".opt").forEach(x=>{if(+x.dataset.i==ans)x.classList.add("ok")});if(!ok)b.classList.add("bad");
+if(ok){Q.sc++;addXp(10)}else addXp(-1);
+$("#m").innerHTML=`<span class="${ok?"ok-t":"bad-t"}">${ok?"Rätt! +10 XP":"Fel."}</span><div style="font-weight:400;margin-top:6px">${hl(P[ans].x)}</div>`;
+const n=document.createElement("button");n.className="b p";n.style.marginTop="10px";n.textContent="Nästa →";n.onclick=()=>{Q.k++;qq()};$("#m").append(n)}}
+go("lar");
+</script></body></html>
