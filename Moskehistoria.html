@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abrahams sista profet och konsekvenser: tentaplugg</title>
+<style>
+:root{--bg:#faf8f3;--card:#fff;--tx:#222;--mu:#666;--ac:#1d6b5a;--ac2:#e6f2ee;--bd:#e0dcd2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#15191a;--card:#1e2425;--tx:#e8e6e0;--mu:#9aa3a0;--ac:#5cc4a8;--ac2:#1f3a33;--bd:#33403d}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px 16px 60px}
+nav{display:flex;gap:6px;margin-bottom:14px}
+button{font:inherit;font-size:.9rem;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:8px;cursor:pointer}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.v{display:none}.v.on{display:block}
+section,.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:0 0 6px}
+.m{color:var(--mu);font-size:.85rem}
+.top{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.big{font:700 3.2rem/1 Georgia,serif;color:var(--ac)}
+.frog{background:var(--ac2);border-color:var(--ac)}
+.word{font-weight:700;color:var(--ac);margin-left:8px}
+.dom{display:flex;flex-wrap:wrap;gap:6px}
+.dt{min-width:76px;padding:10px 8px;transition:transform .25s;transform-origin:bottom left}
+.dt.fall{transform:rotate(16deg);background:var(--ac);color:#fff;border-color:var(--ac)}
+label{display:block;padding:4px 0}
+.card{padding:0;overflow:hidden}
+.head{display:flex;gap:12px;align-items:center;padding:14px;cursor:pointer}
+.n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ac2);color:var(--ac);display:grid;place-items:center;font-weight:600}
+.q{flex:1;font-size:.95rem}
+.w{flex:none;font-weight:700;color:var(--ac);background:var(--ac2);padding:5px 12px;border-radius:20px}
+.quiz .card:not(.show) .w{color:transparent;background:var(--bd);user-select:none}
+.body{display:none;padding:0 16px 14px 56px;font-size:.93rem}
+.card.open .body{display:block}
+.quiz .card:not(.show) .body{display:none}
+.body ul{margin:4px 0;padding-left:18px}
+.k{display:block;font-size:.75rem;font-weight:600;color:var(--mu);text-transform:uppercase;margin-top:8px}
+.tip{margin-top:8px;font-style:italic;color:var(--mu)}
+.rate{margin-top:10px;font-size:.8rem}.rate button{padding:3px 10px;margin-left:4px}
+.r{display:flex;gap:10px;padding:6px;border-radius:6px}.r b{flex:none;width:76px}
+.r.today{background:var(--ac2);outline:1px solid var(--ac)}.r.past{opacity:.5}
+</style>
+</head>
+<body>
+<main>
+<nav><button data-v="idag" class="on">Idag</button><button data-v="kort">Kort</button><button data-v="plan">Plan</button></nav>
+
+<div class="v on" id="idag">
+<div class="top"><div class="big" id="days">–</div><div><b id="dl"></b><div class="m">till tentan 13 november</div></div></div>
+<section><h2>Dagens uppgift</h2><div id="today"></div></section>
+<section class="frog"><h2>🐸 Grodan: gör den först</h2><div id="frogQ"></div>
+<p class="m">Skriv svaret från minnet i anteckningsboken, jämför sedan.</p>
+<button id="rev">Visa nyckelord</button><span class="word" id="frogW"></span> <button id="eat">Öppna kortet i övningsläge</button></section>
+<section><h2>Dominobrickor <span id="cnt"></span></h2><p class="m" style="margin:0 0 6px">Tryck när du kan frågan utantill idag.</p><div class="dom" id="dom"></div></section>
+<section><h2>Dagens kedja</h2><div id="steps"></div></section>
+</div>
+
+<div class="v" id="kort">
+<nav><button id="bS" class="on">Studera</button><button id="bQ">Öva (dolda ord)</button><button id="bA">Öppna/stäng alla</button></nav>
+<div id="list"></div>
+</div>
+
+<div class="v" id="plan"><section><h2>Plan 30 okt till 13 nov</h2><div id="pl"></div></section></div>
+</main>
+<script>
+const D=[
+["Nivåer","Islam, iman, ihsan: betydelse och samband",["<b>Islam</b> = underkastelse; yttre praktik (fem pelare)","<b>Iman</b> = tro; inre övertygelse (Gud, änglar, skrifter, profeter, domedag, förutbestämmelse)","<b>Ihsan</b> = att göra det vackra; tillbe Gud som om du såg honom (Gabriel-hadithen)"],"Tre nivåer av samma religiositet. Exempel: bön på jobbet (islam), i förvissning om att Gud hör (iman), uppriktigt närvarande (ihsan).","Kropp, hjärta, själ."],
+["Auktoritet","Koranen vs hadither: ursprung, tillkomst, auktoritet",["<b>Koranen</b>: Guds tal via Gabriel, ca 23 år, samlad under Uthman; högsta, ofelbar","<b>Hadither</b>: berättelser om Muhammeds ord, handlingar, godkännanden; nedtecknade stort 700-800-tal; graderas","Koranen ger grunden; hadither förklarar (t.ex. hur bönen utförs). Båda i fiqh, teologi, predikan"],"","Koranen först, hadither tolkar."],
+["Splittring","Första inbördeskriget (fitna) 656-661",["Uthman mördas 656; Ali blir kalif","Kamelslaget 656 (Aisha, Talha, Zubayr); Siffin 657 (Muawiya); skiljedom → khawarij bryter med Ali","Ali mördas 661; Muawiya grundar umayyadkalifatet"],"Följder: sunna/shia/khawarij; ledarskapsfrågan central; kalifat blir dynasti; debatt om synd och tro.","Fitna = splittring."],
+["Miljö","Religiös miljö i senantiken",["Mellan Bysans (kristet) och Sasanidriket (zoroastriskt)","Kristna (miafysiter, nestorianer, kalkedonier), Aksum, judiskt Jemen, judar i Medina","Mecka: polyteism kring Kaba, men Allah som hög gud; hanifer söker ren monoteism"],"Judendom/kristendom gav monoteism, profeter, skrifter, domedag, Abraham/Mose/Jesus. Likhet: en skapare-Gud, profeter. Skillnad: Jesus som Guds son/treenighet vs profet.","Stormakter + monoteism."],
+["Källkritik","Källor till Muhammeds liv",["Koranen (få biografiska detaljer)","Sira/historieverk: Ibn Ishaq/Ibn Hisham, al-Waqidi, Ibn Sa’d, al-Tabari","Hadithsamlingar","Icke-muslimska källor (Doctrina Jacobi, Sebeos); arkeologi, mynt, inskrifter, papyri"],"Problem 1: tidsavstånd och muntlig förmedling → legendbildning. Problem 2: tendens; källor legitimerar grupper/dynastier/rättsskolor. Utomstående källor korta.","Tid + tendens."],
+["Stat","Medina efter hijra (622)",["<b>Politiskt</b>: Muhammed ledare; Medinadokumentet, umma; Badr, Uhud, Grävens slag; Mecka 630","<b>Religiöst</b>: qibla Jerusalem → Mecka; ramadan, zakat, pilgrimsfärd","<b>Socialt</b>: familjerätt, arv, straff, handel; muhajirun och ansar"],"Betydelse: förebild för islamisk samhällsordning; juridiska koranverser; sunnan som norm; hijra = tideräkningens början.","Från minoritet till stat."],
+["Perspektiv","Koranens ursprung: tradition vs forskning",["<b>Tradition</b>: Guds ord via Gabriel, ca 23 år; följeslagare memorerar/skriver; Uthmans standardtext (mushaf); ouppskapat; mirakel","<b>Forskning</b>: handskrifter (Sanaa, Birmingham), språk, inskrifter, paralleller; när fastställdes texten?"],"Skillnad: tradition utgår från gudomligt ursprung och oförändrad förmedling; forskning kan inte pröva uppenbarelsen utan förklarar historiskt.","Tro vs historia."],
+["Tawhid","Tre teman i Koranen + sura Yusuf",["<b>Tawhid</b>: Gud är en; shirk grövsta synd","<b>Etik/rättvisa</b>: barmhärtighet, ärlighet, omsorg om föräldralösa/fattiga, förbud mot ocker","<b>Profetberättelser</b>: Adam, Noa, Abraham, Mose, Jesus; samma budskap"],"Sura 12 (Yusuf): profetberättelse + etik (sabr, kyskhet, förlåtelse); tawhid: i fängelset förkunnar han Gud ensam; Gud styr allt.","T-E-P: Tawhid, Etik, Profeter."],
+["Isnad","Hadith och sunna; granskning",["<b>Hadith</b> = enskild berättelse (text)","<b>Sunna</b> = normativ praxis; det hadither beskriver","<b>Granskning</b>: isnad (kedjan) + matn (innehållet); ’ilm al-rijal; sahih, hasan, da’if, fabricerad"],"Exempel: ”att le mot din broder är sadaqa”; sunnan styr bön, hälsning (salam), bismillah, handtvätt före måltid.","Isnad = kedjan, matn = texten."],
+["Imamat","Sunnitiskt vs tolvshiitiskt ledarskap och auktoritet",["<b>Sunni</b>: kalif väljs (shura), ej släkt, ej ofelbar, politisk auktoritet; religiös auktoritet hos ulama, rättsskolor, ijma’","<b>Tolvshia</b>: Ali utsedd vid Ghadir Khumm; tolv imamer, ofelbara (ma’sum); den tolfte i ghayba, återvänder som Mahdi"],"Auktoritet: sunni = utspridd; shia = imamerna, nu mujtahider/ayatollor; marja’ al-taqlid; wilayat al-faqih (Khomeini, omstridd).","Imam = utsedd; kalif = vald."],
+["Kanon","Hadithsamlingar",["<b>Sunni</b>: al-Bukhari, Muslim, Abu Dawud, al-Tirmidhi, al-Nasa’i, Ibn Maja (sex böcker)","<b>Shia</b>: al-Kulayni (<i>al-Kafi</i>), Ibn Babawayh (<i>Man la yahduruhu al-faqih</i>), al-Tusi (<i>Tahdhib</i>, <i>Istibsar</i>); senare <i>Bihar al-anwar</i>"],"Varför olika: olika förmedlare (sahaba vs ahl al-bayt/imamer) och granskning → olika rättsregler. Exempel: tvagning (fötter), sammanslagna böner, mut’a.","Sex sunni, fyra shia."],
+["Återgång","Sunnism, salafism, modernism",["<b>Kalam</b>: ash’arism, maturidism, athari","<b>Fiqh</b>: fyra rättsskolor (hanafi, maliki, shafi’i, hanbali); usul al-fiqh","<b>Sufism</b>: tariqor, ihsan, inre rening, helgonkult"],"<b>Salafism</b>: tillbaka till salaf, kritik av helgonkult/sufism/taqlid (Ibn Taymiyya, wahhabism). <b>Modernism</b>: al-Afghani, Abduh, Sayyid Ahmad Khan; ijtihad. Båda går tillbaka till källorna: salafism bevarar renhet, modernism förnyar.","Båda går tillbaka; olika mål."]];
+const P=[[10,30,'Fråga 1-2: läs i boken, sedan kortet. Öva direkt efter.'],[10,31,'Fråga 3-4 + repetera 1-2.'],[11,1,'Fråga 5-6 + repetera 3-4.'],[11,2,'Fråga 7-8 + repetera 5-6.'],[11,3,'Fråga 9-10 + repetera 7-8.'],[11,4,'Fråga 11-12 + repetera 9-10.'],[11,5,'Öva fråga 1-6 utan att titta. Läs om luckor.'],[11,6,'Öva fråga 7-12 utan att titta. Läs om luckor.'],[11,7,'Kedjan utantill + de 4 svagaste frågorna.'],[11,8,'Skriv svar från minnet: fråga 1-4.'],[11,9,'Skriv svar från minnet: fråga 5-8.'],[11,10,'Skriv svar från minnet: fråga 9-12.'],[11,11,'Alla 12 från minnet. Skriv om det som brister.'],[11,12,'Lätt repetition av kedjan. Sov ordentligt.'],[11,13,'Tentadag: kedjan en gång, inget nytt.']];
+const $=id=>document.getElementById(id),bd=document.body;
+const n=new Date(),td=new Date(n.getFullYear(),n.getMonth(),n.getDate()),tk=td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
+let S={r:[],d:{}};try{S=JSON.parse(localStorage.getItem('tentaS'))||S}catch(e){}
+const sv=()=>{try{localStorage.setItem('tentaS',JSON.stringify(S))}catch(e){}};
+S.r=S.r||[];S.d=S.d||{};S.d[tk]=S.d[tk]||{s:[],t:[]};const T=S.d[tk];
+
+function show(v){document.querySelectorAll('.v').forEach(x=>x.classList.toggle('on',x.id===v));document.querySelectorAll('nav button[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+document.querySelectorAll('nav button[data-v]').forEach(b=>b.onclick=()=>show(b.dataset.v));
+
+const left=Math.round((new Date(2026,10,13)-td)/864e5);
+$('days').textContent=left>0?left:(left===0?'Idag':'✓');
+$('dl').textContent=left>1?'dagar kvar':left===1?'dag kvar':left===0?'Lycka till!':'Tentan är avklarad';
+const pl=P.find(p=>new Date(2026,p[0]-1,p[1])-td===0);
+$('today').textContent=pl?pl[2]:(td<new Date(2026,9,30)?'Planen startar 30 oktober.':'Ingen planerad uppgift idag.');
+$('pl').innerHTML=P.map(p=>{const d=new Date(2026,p[0]-1,p[1]),c=d-td===0?' today':d<td?' past':'';return `<div class="r${c}"><b>${p[1]} ${p[0]==10?'okt':'nov'}</b><span>${p[2]}</span></div>`}).join('');
+
+const cards=[];let fm=0;
+D.forEach((d,i)=>{const c=document.createElement('div');c.className='card';
+c.innerHTML=`<div class="head"><div class="n">${i+1}</div><div class="q">${d[1]}</div><div class="w">${d[0]}</div></div><div class="body"><ul>${d[2].map(x=>`<li>${x}</li>`).join('')}</ul>${d[3]?`<span class="k">Samband och exempel</span>${d[3]}`:''}<div class="tip">Minnesregel: ${d[4]}</div><div class="rate">Hur väl sitter den? ${['Svag','Okej','Sitter'].map((l,j)=>`<button data-r="${j+1}">${l}</button>`).join('')}</div></div>`;
+c.querySelector('.head').onclick=()=>{if(bd.classList.contains('quiz'))c.classList.add('show','open');else c.classList.toggle('open')};
+c.querySelectorAll('.rate button').forEach(b=>b.onclick=()=>{S.r[i]=+b.dataset.r;sv();paint();frog()});
+$('list').appendChild(c);cards.push(c)});
+function paint(){cards.forEach((c,i)=>c.querySelectorAll('.rate button').forEach(b=>b.classList.toggle('on',+b.dataset.r===S.r[i])))}
+function frog(){let mv=9;fm=0;for(let i=0;i<12;i++){const v=S.r[i]||0;if(v<mv){mv=v;fm=i}}$('frogQ').innerHTML='<b>Fråga '+(fm+1)+':</b> '+D[fm][1];$('frogW').textContent=''}
+$('rev').onclick=()=>$('frogW').textContent=D[fm][0];
+function quiz(on){bd.classList.toggle('quiz',on);$('bQ').classList.toggle('on',on);$('bS').classList.toggle('on',!on);cards.forEach(c=>c.classList.remove('show','open'))}
+$('bS').onclick=()=>quiz(false);$('bQ').onclick=()=>quiz(true);
+$('bA').onclick=()=>{const a=cards.some(c=>c.classList.contains('open'));cards.forEach(c=>{c.classList.toggle('open',!a);if(bd.classList.contains('quiz'))c.classList.toggle('show',!a)})};
+$('eat').onclick=()=>{show('kort');quiz(true);cards[fm].scrollIntoView({behavior:'smooth',block:'center'})};
+
+const ST=['Grodan först: 25 min, ingen mobil. Skriv från minnet.','Säg hela kedjan högt (2 min).','Dagens uppgift enligt planen.','Repetera gårdagens frågor.','Kväll: kedjan igen och betygsätt frågorna (5 min).'];
+$('steps').innerHTML=ST.map((s,i)=>`<label><input type="checkbox" data-i="${i}"${T.s[i]?' checked':''}> ${s}</label>`).join('');
+$('steps').querySelectorAll('input').forEach(x=>x.onchange=()=>{T.s[+x.dataset.i]=x.checked;sv()});
+const cnt=()=>$('cnt').textContent=T.t.filter(Boolean).length+'/12';
+$('dom').innerHTML=D.map((d,i)=>`<button class="dt${T.t[i]?' fall':''}" data-i="${i}">${d[0]}</button>`).join('');
+$('dom').querySelectorAll('.dt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;T.t[i]=!T.t[i];b.classList.toggle('fall',!!T.t[i]);sv();cnt()});
+cnt();paint();frog();
+</script>
+</body>
+</html>
