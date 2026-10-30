@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Startsida: tentaplugg</title>
+<style>
+:root{--bg:#faf8f3;--card:#fff;--tx:#222;--mu:#666;--ac:#1d6b5a;--ac2:#e6f2ee;--bd:#e0dcd2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15191a;--card:#1e2425;--tx:#e8e6e0;--mu:#9aa3a0;--ac:#5cc4a8;--ac2:#1f3a33;--bd:#33403d}}
+:root[data-theme="dark"]{--bg:#15191a;--card:#1e2425;--tx:#e8e6e0;--mu:#9aa3a0;--ac:#5cc4a8;--ac2:#1f3a33;--bd:#33403d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 50px}
+.top{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.big{font:700 3.2rem/1 Georgia,serif;color:var(--ac)}
+.top p{margin:0;color:var(--mu);font-size:.9rem}
+.top b{color:var(--tx);font-size:1.05rem}
+section{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mu);margin:0 0 6px}
+button{font:inherit;font-size:.9rem;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 12px;border-radius:8px;cursor:pointer}
+button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.frog{background:var(--ac2);border-color:var(--ac)}
+.word{display:inline-block;font-weight:700;color:var(--ac);margin-left:6px}
+.dom{display:flex;flex-wrap:wrap;gap:6px}
+.dt{min-width:76px;padding:10px 8px;transition:transform .25s;transform-origin:bottom left}
+.dt.fall{transform:rotate(16deg);background:var(--ac);color:#fff;border-color:var(--ac)}
+label{display:block;padding:4px 0}
+.row{display:flex;gap:8px;align-items:center;padding:5px 0;border-top:1px solid var(--bd);font-size:.9rem}
+.row:first-of-type{border-top:0}
+.row span{flex:1}
+.row button{padding:3px 9px;font-size:.8rem}
+a{color:var(--ac)}
+.m{color:var(--mu);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><div class="big" id="days">–</div><div><b id="dl">dagar kvar</b><p>till tentan fredag 13 november</p></div></div>
+
+<section><h2>Dagens uppgift</h2><div id="today"></div></section>
+
+<section class="frog"><h2>🐸 Grodan: gör den först</h2>
+<div id="frogQ"></div>
+<p class="m">Skriv svaret från minnet i anteckningsboken. Slå sedan upp och jämför.</p>
+<button id="rev">Visa nyckelord</button><span class="word" id="frogW"></span></section>
+
+<section><h2>Dominobrickor <span id="cnt"></span></h2>
+<p class="m" style="margin:0 0 6px">Tryck när du kan frågan utantill idag.</p>
+<div class="dom" id="dom"></div></section>
+
+<section><h2>Dagens kedja</h2><div id="steps"></div></section>
+
+<section><h2>Hur väl sitter varje fråga?</h2><div id="rate"></div></section>
+
+<p class="m"><a href="https://claude.ai/artifact/AERPfa9Fuo2Hr3LjJD2vBN">Öppna alla studiekort och hela planen →</a></p>
+</main>
+<script>
+const Q=[["Nivåer","Islam, iman, ihsan"],["Auktoritet","Koranen vs hadither"],["Splittring","Första inbördeskriget 656–661"],["Miljö","Religiös miljö i senantiken"],["Källkritik","Källor till Muhammeds liv"],["Stat","Medina efter hijra"],["Perspektiv","Koranens ursprung: tradition vs forskning"],["Tawhid","Tre teman + sura Yusuf"],["Isnad","Hadith och sunna"],["Imamat","Sunni vs tolvshia: ledarskap"],["Kanon","Hadithsamlingar"],["Återgång","Sunnism, salafism, modernism"]];
+const P=[[10,30,'Fråga 1–2: läs i boken, kolla anteckningsboken, öva.'],[10,31,'Fråga 3–4 + repetera 1–2.'],[11,1,'Fråga 5–6 + repetera 3–4.'],[11,2,'Fråga 7–8 + repetera 5–6.'],[11,3,'Fråga 9–10 + repetera 7–8.'],[11,4,'Fråga 11–12 + repetera 9–10.'],[11,5,'Öva fråga 1–6 utan att titta. Läs om luckor.'],[11,6,'Öva fråga 7–12 utan att titta. Läs om luckor.'],[11,7,'Kedjan utantill + de 4 svagaste frågorna.'],[11,8,'Skriv svar från minnet: fråga 1–4.'],[11,9,'Skriv svar från minnet: fråga 5–8.'],[11,10,'Skriv svar från minnet: fråga 9–12.'],[11,11,'Alla 12 från minnet. Skriv om det som brister.'],[11,12,'Lätt repetition av kedjan. Sov ordentligt.'],[11,13,'Tentadag: kedjan en gång, inget nytt.']];
+const $=id=>document.getElementById(id);
+const n=new Date(),td=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+const tk=td.getFullYear()+'-'+(td.getMonth()+1)+'-'+td.getDate();
+let S={r:[],d:{}};try{S=JSON.parse(localStorage.getItem('startS'))||S}catch(e){}
+const sv=()=>{try{localStorage.setItem('startS',JSON.stringify(S))}catch(e){}};
+S.r=S.r||[];S.d=S.d||{};S.d[tk]=S.d[tk]||{s:[],t:[]};const T=S.d[tk];
+
+const left=Math.round((new Date(2026,10,13)-td)/864e5);
+$('days').textContent=left>0?left:(left===0?'Idag':'✓');
+$('dl').textContent=left>1?'dagar kvar':left===1?'dag kvar':left===0?'Lycka till!':'Tentan är avklarad';
+
+let pl=P.find(p=>new Date(2026,p[0]-1,p[1])-td===0);
+$('today').textContent=pl?pl[2]:(td<new Date(2026,9,30)?'Planen startar 30 oktober.':'Ingen planerad uppgift idag.');
+
+function frog(){let m=0,mv=9;for(let i=0;i<12;i++){const v=S.r[i]||0;if(v<mv){mv=v;m=i}}
+$('frogQ').innerHTML='<b>Fråga '+(m+1)+':</b> '+Q[m][1];$('frogW').textContent='';
+$('rev').onclick=()=>$('frogW').textContent=Q[m][0]}
+
+const ST=['Grodan först: 25 min, ingen mobil.','Säg hela kedjan högt (2 min).','Dagens uppgift enligt planen.','Repetera gårdagens frågor.','Kväll: kedjan igen och betygsätt frågorna (5 min).'];
+$('steps').innerHTML=ST.map((s,i)=>`<label><input type="checkbox" data-i="${i}"${T.s[i]?' checked':''}> ${s}</label>`).join('');
+$('steps').querySelectorAll('input').forEach(x=>x.onchange=()=>{T.s[+x.dataset.i]=x.checked;sv()});
+
+const cnt=()=>$('cnt').textContent=T.t.filter(Boolean).length+'/12';
+$('dom').innerHTML=Q.map((q,i)=>`<button class="dt${T.t[i]?' fall':''}" data-i="${i}">${q[0]}</button>`).join('');
+$('dom').querySelectorAll('.dt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;T.t[i]=!T.t[i];b.classList.toggle('fall',!!T.t[i]);sv();cnt()});
+
+$('rate').innerHTML=Q.map((q,i)=>`<div class="row"><span>${i+1}. ${q[1]}</span>${['Svag','Okej','Sitter'].map((l,j)=>`<button data-i="${i}" data-r="${j+1}">${l}</button>`).join('')}</div>`).join('');
+function paint(){$('rate').querySelectorAll('button').forEach(b=>b.classList.toggle('on',S.r[+b.dataset.i]===+b.dataset.r))}
+$('rate').querySelectorAll('button').forEach(b=>b.onclick=()=>{S.r[+b.dataset.i]=+b.dataset.r;sv();paint();frog()});
+cnt();paint();frog();
+</script>
+</body>
+</html>
