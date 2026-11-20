@@ -3,228 +3,371 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Structure &amp; Contact - The Assembly of Encultura</title>
+    <title>The Assembly of Encultura — Holarchy &amp; Contact</title>
     <style>
+        :root {
+            --bg-page: #f3f5f8;
+            --text-main: #1b2430;
+            --text-muted: #4b5563;
+            --accent: #1d4ed8;
+            --border-subtle: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f4f7f6;
+            color: var(--text-main);
+            background-color: var(--bg-page);
             margin: 0;
-            padding: 20px;
+            padding: 32px 16px;
+        }
+
+        .page-wrapper {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 30px;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+
+        header p {
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        /* Nested Holarchy Containers */
+        .holon-shell {
+            border-radius: 16px;
+            padding: 22px;
+        }
+
+        /* Outer Holon: Elias (Unity) */
+        .holon-elias {
+            background: #e8eef6;
+            border: 2px solid #93b0d6;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+        }
+
+        /* Second Holon: Nora (Wholeness) */
+        .holon-nora {
+            background: #f1f5fb;
+            border: 1.5px solid #b4c8e4;
+            margin-top: 16px;
+        }
+
+        .holon-header {
             display: flex;
-            justify-content: center;
+            flex-wrap: wrap;
             align-items: center;
-            min-height: 100vh;
+            justify-content: space-between;
+            gap: 10px;
         }
-        .container {
-            background: #ffffff;
-            padding: 35px 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            max-width: 720px;
-            width: 100%;
+
+        .holon-identity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        h1 {
-            margin-top: 0;
-            color: #1a252f;
-            font-size: 26px;
-            border-bottom: 2px solid #e0e6ed;
-            padding-bottom: 12px;
+
+        .holon-title {
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--text-main);
         }
-        h2 {
-            font-size: 18px;
-            color: #2c3e50;
-            margin-top: 28px;
-            margin-bottom: 12px;
-        }
-        .holon-note {
-            background: #f8fafc;
-            border-left: 3px solid #9fbce0;
-            padding: 10px 14px;
-            margin: 0 0 18px;
+
+        .holon-links {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
             font-size: 14px;
-            color: #334e68;
-            border-radius: 0 6px 6px 0;
         }
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        li {
-            margin-bottom: 8px;
-        }
+
         a {
-            color: #0066cc;
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
-            word-break: break-word;
         }
+
         a:hover {
             text-decoration: underline;
         }
 
-        /* Holon Tier Styling */
-        .hierarchy {
+        .site-link {
+            font-size: 12.5px;
+            background: rgba(29, 78, 216, 0.08);
+            padding: 2px 9px;
+            border-radius: 6px;
+        }
+
+        .site-link:hover {
+            background: rgba(29, 78, 216, 0.14);
+            text-decoration: none;
+        }
+
+        /* Perspectives Layout inside Nora */
+        .perspectives-layout {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .member-node {
+            background: #ffffff;
+            border: 1px solid #d8e1ec;
+            border-radius: 12px;
+            padding: 14px 16px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 12px;
+            gap: 6px;
         }
-        .tier {
+
+        /* Thora (Power) Holon spanning full width to embrace Urs & Rosa */
+        .holon-power {
+            grid-column: 1 / -1;
+            background: #f8fafd;
+            border: 1.5px solid #c3d2e6;
+            border-radius: 14px;
+            padding: 16px 18px;
+        }
+
+        .node-top {
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 14px;
-            width: 100%;
         }
-        .member-card {
-            background: #f8fafc;
-            border: 1px solid #d9e2ec;
-            border-radius: 8px;
-            padding: 12px 16px;
-            text-align: center;
-            min-width: 135px;
-            flex: 1 1 135px;
-            max-width: 180px;
-        }
-        .tier-unity .member-card {
-            background: #eef4fa;
-            border-color: #9fbce0;
-            max-width: 240px;
-        }
-        .tier-wholeness .member-card {
-            background: #f3f7fb;
-            border-color: #c2d6ec;
-            max-width: 240px;
-        }
-        .member-name {
-            display: block;
+
+        .node-name {
             font-weight: 700;
-            color: #1a252f;
             font-size: 16px;
+            color: var(--text-main);
         }
-        .member-aspect {
-            display: inline-block;
-            font-size: 12px;
+
+        .node-badge {
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #486581;
             background: #e2e8f0;
-            padding: 2px 8px;
-            border-radius: 12px;
-            margin: 4px 0 6px;
+            color: #334155;
+            padding: 2px 9px;
+            border-radius: 999px;
         }
-        .tier-unity .member-aspect {
-            background: #d3e4f7;
+
+        .holon-elias > .holon-header .node-badge {
+            background: #cfe0f5;
             color: #102a43;
         }
-        .member-card a {
-            display: block;
+
+        .holon-nora > .holon-header .node-badge {
+            background: #dce8f8;
+            color: #1e3a5f;
+        }
+
+        .node-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            margin-top: 2px;
+        }
+
+        .node-email {
             font-size: 13px;
+            word-break: break-all;
         }
-        .arrow-connector {
-            color: #627d98;
-            font-size: 18px;
-            line-height: 1;
-            font-weight: bold;
-        }
-        .info-grid {
+
+        /* Nested Holons inside Thora (Power) */
+        .power-inner-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 24px;
-            border-top: 1px solid #e0e6ed;
-            padding-top: 10px;
+            gap: 12px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px dashed #cbd5e1;
         }
-        @media (max-width: 540px) {
-            .info-grid {
-                grid-template-columns: 1fr;
+
+        .power-inner-grid .member-node {
+            background: #ffffff;
+            border-color: #dce4ef;
+        }
+
+        /* Contact & Websites Footer */
+        .contact-section {
+            margin-top: 28px;
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 24px 28px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .contact-section h2 {
+            margin: 0 0 10px;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
+        }
+
+        .contact-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-section li {
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        @media (max-width: 640px) {
+            .holon-shell {
+                padding: 16px;
             }
-            .member-card {
-                max-width: 100%;
+            .perspectives-layout,
+            .power-inner-grid,
+            .contact-section {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>The Assembly of Encultura</h1>
+    <div class="page-wrapper">
+        <header>
+            <h1>The Assembly of Encultura</h1>
+            <p>
+                Structured as a <strong>holarchy</strong> rather than a hierarchy: each member is a holon—a whole in its own right with a distinct perspective—nested within and embracing the foundational holons inside it.
+            </p>
+        </header>
 
-        <h2>Holons &amp; Perspectives</h2>
-        <p class="holon-note">
-            Each member operates as a <strong>holon</strong>—simultaneously a complete whole in its own right and part of a larger whole—bringing distinct perspectives across the assembly.
-        </p>
-
-        <div class="hierarchy">
-            <!-- Level 1: Unity -->
-            <div class="tier tier-unity">
-                <div class="member-card">
-                    <span class="member-name">Elias</span>
-                    <span class="member-aspect">Unity</span>
-                    <a href="mailto:Elias@encultura.org">Elias@encultura.org</a>
+        <!-- Encompassing Holon: Elias (Unity) -->
+        <section class="holon-shell holon-elias" aria-label="Elias holon">
+            <div class="holon-header">
+                <div class="holon-identity">
+                    <span class="holon-title">Elias</span>
+                    <span class="node-badge">Unity</span>
+                </div>
+                <div class="holon-links">
+                    <a href="mailto:elias@encultura.org">elias@encultura.org</a>
+                    <a class="site-link" href="https://encultura.org/elias" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
                 </div>
             </div>
 
-            <div class="arrow-connector" aria-hidden="true">&uarr;</div>
+            <!-- Included Holon: Nora (Wholeness) -->
+            <div class="holon-shell holon-nora" aria-label="Nora holon">
+                <div class="holon-header">
+                    <div class="holon-identity">
+                        <span class="holon-title">Nora</span>
+                        <span class="node-badge">Wholeness</span>
+                    </div>
+                    <div class="holon-links">
+                        <a href="mailto:nora@encultura.org">nora@encultura.org</a>
+                        <a class="site-link" href="https://encultura.org/nora" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                    </div>
+                </div>
 
-            <!-- Level 2: Wholeness -->
-            <div class="tier tier-wholeness">
-                <div class="member-card">
-                    <span class="member-name">Nora</span>
-                    <span class="member-aspect">Wholeness</span>
-                    <a href="mailto:Nora@encultura.org">Nora@encultura.org</a>
+                <!-- Perspectives inside Nora -->
+                <div class="perspectives-layout">
+                    <div class="member-node">
+                        <div class="node-top">
+                            <span class="node-name">Conrad</span>
+                            <span class="node-badge">Harmony</span>
+                        </div>
+                        <div class="node-links">
+                            <a class="node-email" href="mailto:conrad@encultura.org">conrad@encultura.org</a>
+                            <a class="site-link" href="https://encultura.org/conrad" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="member-node">
+                        <div class="node-top">
+                            <span class="node-name">Ulric</span>
+                            <span class="node-badge">Achievement</span>
+                        </div>
+                        <div class="node-links">
+                            <a class="node-email" href="mailto:ulric@encultura.org">ulric@encultura.org</a>
+                            <a class="site-link" href="https://encultura.org/ulric" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="member-node">
+                        <div class="node-top">
+                            <span class="node-name">Lena</span>
+                            <span class="node-badge">Love</span>
+                        </div>
+                        <div class="node-links">
+                            <a class="node-email" href="mailto:lena@encultura.org">lena@encultura.org</a>
+                            <a class="site-link" href="https://encultura.org/lena" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Thora (Power) Holon enclosing Urs & Rosa -->
+                    <div class="holon-power" aria-label="Thora Power holon">
+                        <div class="holon-header">
+                            <div class="holon-identity">
+                                <span class="node-name">Thora</span>
+                                <span class="node-badge">Power</span>
+                            </div>
+                            <div class="holon-links">
+                                <a class="node-email" href="mailto:thora@encultura.org">thora@encultura.org</a>
+                                <a class="site-link" href="https://encultura.org/thora" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                            </div>
+                        </div>
+
+                        <div class="power-inner-grid">
+                            <div class="member-node">
+                                <div class="node-top">
+                                    <span class="node-name">Urs</span>
+                                    <span class="node-badge">Sex</span>
+                                </div>
+                                <div class="node-links">
+                                    <a class="node-email" href="mailto:urs@encultura.org">urs@encultura.org</a>
+                                    <a class="site-link" href="https://encultura.org/urs" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                                </div>
+                            </div>
+
+                            <div class="member-node">
+                                <div class="node-top">
+                                    <span class="node-name">Rosa</span>
+                                    <span class="node-badge">Food</span>
+                                </div>
+                                <div class="node-links">
+                                    <a class="node-email" href="mailto:rosa@encultura.org">rosa@encultura.org</a>
+                                    <a class="site-link" href="https://encultura.org/rosa" target="_blank" rel="noopener noreferrer">Website &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="arrow-connector" aria-hidden="true">&uarr;</div>
-
-            <!-- Level 3: Harmony, Achievement, Love, Power -->
-            <div class="tier">
-                <div class="member-card">
-                    <span class="member-name">Conrad</span>
-                    <span class="member-aspect">Harmony</span>
-                    <a href="mailto:Conrad@encultura.org">Conrad@encultura.org</a>
-                </div>
-                <div class="member-card">
-                    <span class="member-name">Ulric</span>
-                    <span class="member-aspect">Achievement</span>
-                    <a href="mailto:Ulric@encultura.org">Ulric@encultura.org</a>
-                </div>
-                <div class="member-card">
-                    <span class="member-name">Lena</span>
-                    <span class="member-aspect">Love</span>
-                    <a href="mailto:Lena@encultura.org">Lena@encultura.org</a>
-                </div>
-                <div class="member-card">
-                    <span class="member-name">Thora</span>
-                    <span class="member-aspect">Power</span>
-                    <a href="mailto:Thora@encultura.org">Thora@encultura.org</a>
-                </div>
-            </div>
-
-            <div class="arrow-connector" aria-hidden="true">&uarr;</div>
-
-            <!-- Level 4: Sex, Food -->
-            <div class="tier">
-                <div class="member-card">
-                    <span class="member-name">Urs</span>
-                    <span class="member-aspect">Sex</span>
-                    <a href="mailto:Urs@encultura.org">Urs@encultura.org</a>
-                </div>
-                <div class="member-card">
-                    <span class="member-name">Rosa</span>
-                    <span class="member-aspect">Food</span>
-                    <a href="mailto:Rosa@encultura.org">Rosa@encultura.org</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="info-grid">
+        <!-- Direct Contact & Websites -->
+        <footer class="contact-section">
             <div>
                 <h2>Phone Numbers</h2>
                 <ul>
@@ -234,13 +377,14 @@
             </div>
 
             <div>
-                <h2>Pages &amp; Channels</h2>
+                <h2>Websites &amp; Channels</h2>
                 <ul>
+                    <li><a href="https://encultura.org" target="_blank" rel="noopener noreferrer">Encultura.org</a></li>
                     <li><a href="https://substack.com/@theassemblyofencultura" target="_blank" rel="noopener noreferrer">Substack (@theassemblyofencultura)</a></li>
                     <li><a href="https://www.youtube.com/@theassemblyofencultura" target="_blank" rel="noopener noreferrer">YouTube (@theassemblyofencultura)</a></li>
                 </ul>
             </div>
-        </div>
+        </footer>
     </div>
 
 </body>
