@@ -1,81 +1,91 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edvard Samani - Bortom kartan</title>
+    <title>Contact & Links - The Assembly of Encultura</title>
     <style>
         body {
-            max-width: 40em;
-            margin: 4em auto;
-            padding: 0 1em;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #222;
+            color: #333;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        main { margin-top: 3em; }
-                    
-        /* Visar läsaren att texten går att klicka på och ändra */
-        .editable-area {
-            padding: 1em;
-            border: 1px dashed #ccc;
-            border-radius: 4px;
-            background: #fafafa;
-            outline: none;
+        .container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
         }
-        .editable-area:focus {
-            border-color: #0066cc;
-            background: #fff;
+        h1 {
+            margin-top: 0;
+            color: #1a252f;
+            font-size: 24px;
+            border-bottom: 2px solid #e0e6ed;
+            padding-bottom: 10px;
         }
-        .status-tag {
-            font-size: 0.8em;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 0.5em;
-            display: block;
+        h2 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-top: 25px;
+            margin-bottom: 10px;
         }
-        /* Gör länkarna tydliga inuti textområdet */
-        .editable-area a {
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
             color: #0066cc;
-            text-decoration: underline;
+            text-decoration: none;
+            font-weight: 500;
+            word-break: break-word;
         }
-        .editable-area h2 {
-            margin-top: 0.2em;
-            font-weight: normal;
-            color: #555;
-            font-size: 1.3em;
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-<header>
-    <span class="status-tag">Klicka i texten nedan för att ändra den. Ändringarna sparas bara på din dator.</span>
-</header>
-<hr>
-<main>
-    <article id="my-text-area" class="editable-area" contenteditable="true" itemscope itemtype="https://schema.org/Person">
-        <h1>Encultura.org</h1>
-        <h2>Bortom kartan</h2>
-        <p>Jag vill vara närvarande i de relationer som finns nu, men jag fortsätter att systematisera abstrakta kartor som alltid bara kan vara en tolkning. Det är klart för mig nu att agens utan gemenskap leder ingenstans.</p>
-        <p>Biokemi som är grunden för djuriska instinkter som dopamin, serotonin och oxytocin driver personlighet via agens och gemenskap – de två som med mer nyanser kallas för femfaktormodellen. Och det som personer på ett kulturellt plan upplever som inbjudan och överlämnande.</p>
-        <p>Jag är medveten om detta nu.</p>
-        <p>Hälsningar,<br>
-        <strong itemprop="name"><span itemprop="givenName">Edvard</span> <span itemprop="familyName">Samani</span></strong></p>
-    </article>
-</main>
-<script>
-    var textArea = document.getElementById('my-text-area');
-    
-    // 1. Kolla om det finns sparad text i Local Storage när sidan laddas
-    var savedText = localStorage.getItem('userEditedText');
-    if (savedText) {
-        textArea.innerHTML = savedText;
-    }
-    
-    // 2. Lyssna på när användaren skriver (input) och spara direkt
-    textArea.addEventListener('input', function() {
-        localStorage.setItem('userEditedText', textArea.innerHTML);
-    });
-</script>
+
+    <div class="container">
+        <h1>The Assembly of Encultura</h1>
+
+        <h2>Phone Numbers</h2>
+        <ul>
+            <li><a href="tel:+46721505252">+46 72 150 52 52</a></li>
+            <li><a href="tel:+46733799554">+46 73 379 95 54</a></li>
+        </ul>
+
+        <h2>Team Emails</h2>
+        <ul>
+            <li><a href="mailto:Elias@encultura.org">Elias@encultura.org</a></li>
+            <li><a href="mailto:Nora@encultura.org">Nora@encultura.org</a></li>
+            <li><a href="mailto:Conrad@encultura.org">Conrad@encultura.org</a></li>
+            <li><a href="mailto:Ulric@encultura.org">Ulric@encultura.org</a></li>
+            <li><a href="mailto:Lena@encultura.org">Lena@encultura.org</a></li>
+            <li><a href="mailto:Thora@encultura.org">Thora@encultura.org</a></li>
+            <li><a href="mailto:Urs@encultura.org">Urs@encultura.org</a></li>
+            <li><a href="mailto:Rosa@encultura.org">Rosa@encultura.org</a></li>
+        </ul>
+
+        <h2>Pages & Channels</h2>
+        <ul>
+            <li><a href="https://substack.com/@theassemblyofencultura" target="_blank" rel="noopener noreferrer">Substack (@theassemblyofencultura)</a></li>
+            <li><a href="https://www.youtube.com/@theassemblyofencultura" target="_blank" rel="noopener noreferrer">YouTube (@theassemblyofencultura)</a></li>
+        </ul>
+    </div>
+
 </body>
 </html>
